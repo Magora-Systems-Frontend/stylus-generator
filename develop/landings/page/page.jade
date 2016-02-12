@@ -1,0 +1,30 @@
+extends ../layout
+include ../navigation
+
+block body
+    div.container.clearfix
+        div.sidemenu
+            +navigation
+        div.content
+            h1 Colour Palette
+
+            h2 PRIMARY PALETTE
+
+            div.colors-wrapp.clearfix
+
+                - var colors = [{variable: 'red-primary', value: '#057fcb'},{variable: 'fsdf-primary', value: '#057fcb'}]
+                    each color in colors
+                        div.color-card
+                            label(style='background-color:' + color.value).color-inp-lbl
+                                input(type='text' value=color.value).color-inp
+                            label
+                                input(type='text' value=color.variable).color-var
+
+                div.color-card
+                    label.color-inp-lbl
+                        input(type='text' placeholder='#000000').color-inp
+                    label
+                        input(type='text' placeholder='add new').color-var
+
+            h2 SECONDARY PALETTE
+
