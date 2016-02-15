@@ -50,20 +50,38 @@ block body
 
             h2 Font Family
 
-            label Main Font
-                input(type='text' placeholder='Arial')
 
-            label Secondary Font
-                input(type='text' placeholder='Helvetica')
+            div.fonts-wrapp.clearfix
+                - var fontFamilies = [{variable: 'primary-font-family', value: '"Arial"'}]
+                    each fontFamily in fontFamilies
+                        div.font-family-card
+                            label
+                                input(type='text' value=fontFamily.value placeholder='"Arial"').font-inp
+                            label
+                                input(type='text' value=fontFamily.variable  placeholder='add new').color-var
 
-            label Icon Font
-                input(type='text' placeholder='Font Awesome')
 
-            a(href="javascript:void(0);") Add new
+
+
+
+
+
+
+                label Main Font
+                    input(type='text' placeholder='Arial')
+
+                label Secondary Font
+                    input(type='text' placeholder='Helvetica')
+
+                label Icon Font
+                    input(type='text' placeholder='Font Awesome')
+
+                a(href="javascript:void(0);") Add new
 
             h2 Font Size
 
             label Heading 1 (h1)
+                input(type='text' value='@font-size-h1')
                 input(type='text')
 
             label Heading 2 (h2)
