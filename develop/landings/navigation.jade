@@ -1,5 +1,14 @@
 mixin navigation
     nav
         ul
-            each val in ['colors', 'fonts', 'border-radius']
+            each val in ['colors', 'fonts', 'border-radius', 'buttons']
                 li: a(href='#' + val)= val
+
+
+    select
+        each type in ['.styl', '.less', '.scss']
+            option: = type
+
+    a(href="javascript:void(0);").btn.btn-default edit
+    a(href="javascript:void(0);").btn.btn-success save
+    a(href="javascript:void(0);").btn.btn-info create .styl file

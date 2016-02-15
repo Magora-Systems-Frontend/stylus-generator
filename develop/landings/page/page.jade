@@ -2,7 +2,7 @@ extends ../layout
 include ../navigation
 
 block body
-    div.container.clearfix
+    div.main-wr.container.clearfix
         div.sidemenu
             +navigation
         div.content
@@ -12,13 +12,13 @@ block body
 
             div.colors-wrapp.clearfix
 
-                - var colors = [{variable: 'red-primary', value: '#057fcb'},{variable: 'fsdf-primary', value: '#057fcb'},{variable: 'fdfddfdfffffff-primary', value: '#057fcb'}]
+                - var colors = [{variable: 'brand-primary', value: '#2780e3'},{variable: 'brand-success', value: '#3fb618'},{variable: 'brand-info', value: '#9954bb'},{variable: 'brand-warning', value: '#ff7518'},{variable: 'brand-danger', value: '#ff0039'}]
                     each color in colors
                         div.color-card
                             label(style='background-color:' + color.value).color-inp-lbl
-                                input(type='text' value=color.value).color-inp
+                                input(type='text' value=color.value placeholder='add new').color-inp
                             label
-                                input(type='text' value=color.variable).color-var
+                                input(type='text' value=color.variable placeholder='add new').color-var
 
                 div.color-card
                     label.color-inp-lbl
@@ -31,6 +31,17 @@ block body
 
 
             h2 Secondary Palette
+            div.colors-wrapp.clearfix
+                - var secondaryColors = [{variable: '', value: ''},{variable: '', value: ''},{variable: '', value: ''},{variable: '', value: ''}]
+                    each secondaryColor in secondaryColors
+                        div.color-card
+                            label(style='background-color:' + secondaryColor.value).color-inp-lbl
+                                input(type='text' value=secondaryColor.value placeholder='#000000').color-inp
+                            label
+                                input(type='text' value=secondaryColor.variable placeholder='add new').color-var
+
+                    div.color-card
+                        a(href="javascript:void(0);").color-inp-btn +
 
 
 
@@ -52,12 +63,24 @@ block body
 
             h2 Font Size
 
-            label Title Size (h1)
+            label Heading 1 (h1)
                 input(type='text')
 
-            label Secondary Title Size (h2)
+            label Heading 2 (h2)
+                input(type='text')
+
+            label Heading 3 (h3)
                 input(type='text')
 
             label Title Size
                 input(type='text')
+
+            h2 Text Colors
+
+            label Main text color
+                input(type='text')
+
+            label Muted text color
+                input(type='text')
+
 
