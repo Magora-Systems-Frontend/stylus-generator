@@ -1,0 +1,5 @@
+mixin navigation
+    nav
+        ul
+            each val in ['colors', 'fonts', 'border-radius']
+                li: a(href='#' + val)= val
