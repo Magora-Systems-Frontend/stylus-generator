@@ -27,14 +27,13 @@
           "./develop/fonts/**/*.*"
         ],
         "dst": "results/assets/fonts/"
+      },
+      "img":{
+        "src": [
+          "./develop/img/**/*.*"
+        ],
+        "dst": "results/img/"
       }
-    },
-    "img": {
-      "src": [
-        "./develop/landings/page/img/*.*"
-      ],
-      "dst": "/images",
-      "options": {}
     },
     "javascript":{
       "src": [
