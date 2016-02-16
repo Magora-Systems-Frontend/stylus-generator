@@ -1,6 +1,11 @@
 {
   "db": {
+    "host": "localhost",
+    "port": 27017,
+    "database": "stylizeme",
+    "username": "",
+    "password": "",
     "name": "db",
-    "connector": "memory"
+    "connector": "mongodb"
   }
 }

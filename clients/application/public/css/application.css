@@ -1,11 +1,323 @@
 
 
+body {
+  font: 14px arial, Helvetica, sans-serif;
+  background-color: #f5f5f5;
+  color: #333;
+}
+* {
+  box-sizing: border-box;
+}
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+a {
+  outline: none !important;
+  text-decoration: none;
+}
+a:hover,
+a:focus {
+  text-decoration: none;
+}
+.main-wr {
+  padding-top: 103px;
+}
+.container {
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+.sidemenu {
+  width: 190px;
+  float: left;
+  position: fixed;
+  top: 103px;
+}
+.sidemenu select {
+  display: block;
+  width: 100%;
+  margin-bottom: 20px;
+  padding: 12px 17px;
+  border-radius: 4px;
+  border-color: #f5f5f5;
+  height: 40px;
+  background-color: #fff;
+}
+.sidemenu select:focus {
+  outline: none !important;
+}
+.sidemenu .btn {
+  display: block;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  padding: 12px 25px;
+}
+.sidemenu .btn:active {
+  box-shadow: inset 0 2px 0 rgba(0,0,0,0.15);
+}
+.sidemenu .btn-info {
+  background-color: #159ad6;
+  color: #fff;
+}
+.sidemenu .btn-info:hover,
+.sidemenu .btn-info:focus {
+  background-color: #1e8bbd;
+}
+.sidemenu .btn-success {
+  background-color: #9bc029;
+  color: #fff;
+}
+.sidemenu .btn-success:hover,
+.sidemenu .btn-success:focus {
+  background-color: #8bad24;
+}
+.sidemenu .btn-default {
+  background-color: rgba(5,127,203,0.1);
+  color: #333;
+}
+.sidemenu .btn-default:hover,
+.sidemenu .btn-default:focus {
+  background-color: rgba(5,127,203,0.15);
+}
+.sidemenu ul {
+  background-color: #fff;
+  padding-left: 0;
+  list-style: none;
+  margin: 0 0 20px 0;
+  overflow: hidden;
+  border-radius: 4px;
+}
+.sidemenu ul li:last-child a {
+  border-bottom: none;
+}
+.sidemenu ul a {
+  padding: 12px 25px;
+  display: block;
+  border-bottom: 1px solid #f5f5f5;
+  color: #333;
+}
+.sidemenu ul a:hover {
+  background-color: rgba(5,127,203,0.1);
+}
+.sidemenu ul a:hover:before {
+  content: '< / >';
+  float: right;
+}
+.sidemenu ul a.active {
+  color: #fff;
+  background-color: #159ad6;
+}
+.sidemenu ul a.active:before {
+  content: '< / >';
+  float: right;
+}
+.content {
+  margin: 0 0 20px 210px;
+  background-color: #fff;
+  border-radius: 4px;
+  padding: 10px 10px 10px 20px;
+}
+input[type='text'] {
+  display: block;
+  width: 100%;
+}
+input[type='text']:focus {
+  outline: none;
+}
+h1 {
+  background-color: rgba(5,127,203,0.1);
+  margin: 15px -10px 15px -20px;
+  padding: 3px 0 3px 20px;
+  font-size: 24px;
+}
+h2 {
+  color: #a2a2a2;
+  font-size: 18px;
+}
+h1,
+h2 {
+  font-weight: normal;
+}
+.color-card {
+  border-radius: 4px;
+  float: left;
+  width: -webkit-calc((100% / 5) - 10px);
+  width: calc((100% / 5) - 10px);
+  margin: 0 10px 20px 0;
+}
+.color-inp {
+  border-radius: 4px;
+  border: 1px solid #fff;
+  background-color: #fff;
+  padding: 2px 5px;
+}
+.color-inp-lbl {
+  display: block;
+  background-color: #f5f5f5;
+  margin-bottom: 10px;
+  padding: 40px 20px 10px 20px;
+  border-radius: 4px;
+}
+.color-inp-btn {
+  display: block;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  background-color: #f5f5f5;
+  height: 100px;
+  border: 1px dashed #ddd;
+  text-align: center;
+  color: #ddd;
+  font-size: 70px;
+  line-height: 100px;
+  padding: 0;
+}
+.color-inp-btn:hover {
+  color: rgba(5,127,203,0.1);
+  border-color: rgba(5,127,203,0.1);
+}
+.color-var {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 0 5px;
+}
+.font-family-card {
+  border-radius: 4px;
+  float: left;
+  width: -webkit-calc((100% / 3) - 10px);
+  width: calc((100% / 3) - 10px);
+  margin: 0 10px 20px 0;
+  padding: 20px 20px 10px 20px;
+  background-color: #f5f5f5;
+}
+.font-family-card.font-add-btn {
+  padding: 0;
+  text-align: center;
+}
+.font-family-card.font-add-btn a {
+  color: #ddd;
+  display: block;
+  border: 1px dashed #ddd;
+  border-radius: 4px;
+  height: 85px;
+  line-height: 85px;
+  font-size: 70px;
+}
+.font-family-card.font-add-btn a:hover {
+  color: rgba(5,127,203,0.1);
+  border-color: rgba(5,127,203,0.1);
+}
+.font-inp {
+  border-radius: 4px;
+  border: 1px solid #fff;
+  background-color: #fff;
+  padding: 2px 5px;
+  margin-bottom: 15px;
+}
+@media (min-width: 768px) {
+  .container {
+    width: 750px;
+  }
+}
+@media (min-width: 992px) {
+  .container {
+    width: 970px;
+  }
+}
+@media (min-width: 1200px) {
+  .container {
+    width: 1170px;
+  }
+}
 
 
 
 
+.sidemenu {
+  width: 190px;
+  float: left;
+  position: fixed;
+  top: 103px;
+}
+.sidemenu select {
+  display: block;
+  width: 100%;
+  margin-bottom: 20px;
+  padding: 12px 17px;
+  border-radius: 4px;
+  border-color: #f5f5f5;
+}
+.sidemenu select:focus {
+  outline: none !important;
+}
+.sidemenu .btn {
+  display: block;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  padding: 12px 25px;
+}
+.sidemenu .btn:active {
+  box-shadow: inset 0 2px 0 rgba(0,0,0,0.15);
+}
+.sidemenu .btn-info {
+  background-color: #159ad6;
+  color: #fff;
+}
+.sidemenu .btn-info:hover,
+.sidemenu .btn-info:focus {
+  background-color: #1e8bbd;
+}
+.sidemenu .btn-success {
+  background-color: #9bc029;
+  color: #fff;
+}
+.sidemenu .btn-success:hover,
+.sidemenu .btn-success:focus {
+  background-color: #8bad24;
+}
+.sidemenu .btn-default {
+  background-color: rgba(5,127,203,0.1);
+  color: #333;
+}
+.sidemenu .btn-default:hover,
+.sidemenu .btn-default:focus {
+  background-color: rgba(5,127,203,0.15);
+}
+.sidemenu ul {
+  background-color: #fff;
+  padding-left: 0;
+  list-style: none;
+  margin: 0 0 20px 0;
+  overflow: hidden;
+  border-radius: 4px;
+}
+.sidemenu ul li:last-child a {
+  border-bottom: none;
+}
+.sidemenu ul a {
+  padding: 12px 25px;
+  display: block;
+  border-bottom: 1px solid #f5f5f5;
+  color: #333;
+}
+.sidemenu ul a:hover {
+  background-color: rgba(5,127,203,0.1);
+}
+.sidemenu ul a:hover:before {
+  content: '< / >';
+  float: right;
+}
+.sidemenu ul a.active {
+  color: #fff;
+  background-color: #159ad6;
+}
+.sidemenu ul a.active:before {
+  content: '< / >';
+  float: right;
+}
 
-header {
+class {
   display: block;
 }
 .header {
@@ -14,4 +326,8 @@ header {
   padding: 11px 0 5px 0;
   border-top: 4px solid #057fcb;
   margin-bottom: 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
 }

@@ -12,7 +12,8 @@
             'ngResource',
             'application.packages',
             'application.package',
-            'directive.grid'
+            'directive.grid',
+            'directive.navigation'
         ])
         .config(config);
 

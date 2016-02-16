@@ -31,5 +31,9 @@
   "Role": {
     "dataSource": "db",
     "public": false
+  },
+  "Packages": {
+    "dataSource": "db",
+    "public": true
   }
 }
