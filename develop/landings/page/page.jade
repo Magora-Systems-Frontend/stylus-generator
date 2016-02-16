@@ -52,7 +52,7 @@ block body
 
 
             div.fonts-wrapp.clearfix
-                - var fontFamilies = [{variable: 'primary-font-family', value: '"Arial"'}]
+                - var fontFamilies = [{variable: 'primary-font-family', value: '"Arial"'},{variable: '', value: ''}]
                     each fontFamily in fontFamilies
                         div.font-family-card
                             label
@@ -60,12 +60,8 @@ block body
                             label
                                 input(type='text' value=fontFamily.variable  placeholder='add new').color-var
 
-
-
-
-
-
-
+                    div.font-family-card.font-add-btn
+                        a(href="javascript:void(0);") +
 
                 label Main Font
                     input(type='text' placeholder='Arial')
