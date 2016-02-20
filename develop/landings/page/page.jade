@@ -1,100 +1,93 @@
 extends ../layout
 include ../navigation
-
 block body
     div.main-wr.container.clearfix
         div.sidemenu
             +navigation
         div.content
             h1 Colour Palette
-
             h2 Primary Palette
-
             div.colors-wrapp.clearfix
-
                 - var colors = [{variable: 'brand-primary', value: '#2780e3'},{variable: 'brand-success', value: '#3fb618'},{variable: 'brand-info', value: '#9954bb'},{variable: 'brand-warning', value: '#ff7518'},{variable: 'brand-danger', value: '#ff0039'}]
-                    each color in colors
-                        div.color-card
-                            label(style='background-color:' + color.value).color-inp-lbl
-                                input(type='text' value=color.value placeholder='add new').color-inp
-                            label
-                                input(type='text' value=color.variable placeholder='add new').color-var
-
+                each color in colors
+                    div.color-card
+                        label(style='background-color:' + color.value).color-inp-lbl
+                            input(type='text' value=color.value placeholder='add new').color-inp
+                        label
+                            input(type='text' value=color.variable placeholder='add new').var-value
                 div.color-card
                     label.color-inp-lbl
                         input(type='text' placeholder='#000000').color-inp
                     label
-                        input(type='text' placeholder='add new').color-var
-
+                        input(type='text' placeholder='add new').var-value
                 div.color-card
                     a(href="javascript:void(0);").color-inp-btn +
-
-
             h2 Secondary Palette
             div.colors-wrapp.clearfix
                 - var secondaryColors = [{variable: '', value: ''},{variable: '', value: ''},{variable: '', value: ''},{variable: '', value: ''}]
-                    each secondaryColor in secondaryColors
-                        div.color-card
-                            label(style='background-color:' + secondaryColor.value).color-inp-lbl
-                                input(type='text' value=secondaryColor.value placeholder='#000000').color-inp
-                            label
-                                input(type='text' value=secondaryColor.variable placeholder='add new').color-var
-
+                each secondaryColor in secondaryColors
                     div.color-card
-                        a(href="javascript:void(0);").color-inp-btn +
-
-
-
+                        label(style='background-color:' + secondaryColor.value).color-inp-lbl
+                            input(type='text' value=secondaryColor.value placeholder='#000000').color-inp
+                        label
+                            input(type='text' value=secondaryColor.variable placeholder='add new').var-value
+                div.color-card
+                    a(href="javascript:void(0);").color-inp-btn +
         div.content
             h1 Fonts
-
             h2 Font Family
-
-
             div.fonts-wrapp.clearfix
                 - var fontFamilies = [{variable: 'primary-font-family', value: '"Arial"'},{variable: '', value: ''}]
-                    each fontFamily in fontFamilies
-                        div.font-family-card
-                            label
-                                input(type='text' value=fontFamily.value placeholder='"Arial"').font-inp
-                            label
-                                input(type='text' value=fontFamily.variable  placeholder='add new').color-var
-
-                    div.font-family-card.font-add-btn
-                        a(href="javascript:void(0);") +
-
-                label Main Font
-                    input(type='text' placeholder='Arial')
-
-                label Secondary Font
-                    input(type='text' placeholder='Helvetica')
-
-                label Icon Font
-                    input(type='text' placeholder='Font Awesome')
-
-                a(href="javascript:void(0);") Add new
-
+                each fontFamily in fontFamilies
+                    div.font-family-card
+                        label
+                            input(type='text' value=fontFamily.value placeholder='"Arial"').font-inp
+                        label
+                            input(type='text' value=fontFamily.variable  placeholder='add new').var-value
+                div.font-family-card.font-add-btn
+                    a(href="javascript:void(0);") +
             h2 Font Size
+            p Headings
+            div.fonts-wrapp.clearfix
+                - var fontSizes = [{variable: '@font-size-h1', value: '26'}, {variable: '@font-size-h2', value: '22'}, {variable: '@font-size-h3', value: '20'}, {variable: '@font-size-h4', value: '18'}]
+                each fontSize in fontSizes
+                    div.font-size-card
+                        label
+                            input(type='text' value=fontSize.value placeholder='15').font-inp
+                            | px
+                        label
+                            input(type='text' value=fontSize.variable placeholder='@font-size-*').var-value
+                div.font-size-card
+                    label
+                        input(type='text' placeholder='14').font-inp
+                        | px
+                    label
+                        input(type='text' placeholder='@font-size-h1').var-value
+                div.font-family-card.font-add-btn
+                    a(href="javascript:void(0);") +
 
-            label Heading 1 (h1)
-                input(type='text' value='@font-size-h1')
-                input(type='text')
+            p Main Text Info
+            div.fonts-wrapp.clearfix
+                div.font-size-card.multiple
+                    label
+                        input(type='text' value="14" placeholder='14').font-inp
+                        | px
+                    label
+                        input(type='text' value="@main-font-size" placeholder='@main-font-size').var-value
+                    label
+                        input(type='text' value="#000000" placeholder='#000000').color-inp
+                    label
+                        input(type='text' value="@main-font-color" placeholder='@main-font-color').var-value
 
-            label Heading 2 (h2)
-                input(type='text')
-
-            label Heading 3 (h3)
-                input(type='text')
-
-            label Title Size
-                input(type='text')
-
-            h2 Text Colors
-
-            label Main text color
-                input(type='text')
-
-            label Muted text color
-                input(type='text')
+                div(style='color: #000000; font-size: 14px') London is the capital of the United Kingdom of Great Britain and Northern Ireland. It is the largest city in Europe and one of the largest cities in the world with the population of 11 million people. About a fifth of the total population of the UK lives in the Greater London area, that is London and its suburbs.
 
 
+            p Muted Text
+            div.fonts-wrapp.clearfix
+                div.font-family-card
+                    label
+                        input(type='text' value="#999999" placeholder='#999999').font-inp
+                    label
+                        input(type='text' value="@muted-text-color" placeholder='@muted-text-color').var-value
+
+                div(style='color: #999999') London is the capital of the United Kingdom of Great Britain and Northern Ireland. It is the largest city in Europe and one of the largest cities in the world with the population of 11 million people. About a fifth of the total population of the UK lives in the Greater London area, that is London and its suburbs.

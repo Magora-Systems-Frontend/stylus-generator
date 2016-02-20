@@ -103,6 +103,7 @@ input[type='text']
   width 100%
   &:focus
     outline none
+    border-color $brand-success
 
 h1
   background-color rgba(5, 127, 203, 0.1)
@@ -139,7 +140,7 @@ h2
     margin-bottom 10px
     border-radius $border-radius
     background-color $body-color
-    height 100px
+    height 104px
     border 1px dashed #ddd
     text-align center
     color #ddd
@@ -150,10 +151,10 @@ h2
       color rgba(5, 127, 203, 0.1)
       border-color rgba(5, 127, 203, 0.1)
 
-.color-var
+.var-value
   border 1px solid #ddd
   border-radius $border-radius
-  padding 0 5px
+  padding 2px 5px
 
 .font-family-card
   border-radius $border-radius
@@ -170,13 +171,28 @@ h2
       display block
       border 1px dashed #ddd
       border-radius $border-radius
-      height 85px
+      height 89px
       line-height 85px
       font-size 70px
-
       &:hover
         color rgba(5, 127, 203, 0.1)
         border-color rgba(5, 127, 203, 0.1)
+
+.font-size-card
+  border-radius $border-radius
+  float left
+  background-color $body-color
+  width calc((100% / 3) - 10px)
+  margin 0 10px 20px 0
+  padding 20px 20px 10px 20px
+  &.multiple
+    label
+      > input
+        margin-bottom 15px
+  .font-inp
+    display inline-block
+    width 40px
+    margin-right 5px
 
 .font-inp
   border-radius $border-radius
