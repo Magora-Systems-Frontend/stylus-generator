@@ -1,7 +1,37 @@
 @import "../variables.styl"
+@import "normalize.styl"
+
+.uppercase
+  text-transform uppercase
+
+.full-width
+  width 100%
+
+
+.full-height
+  height 100%
+
+
+.v-a-top
+  vertical-align top
+
+
+.hidden
+  display: none !important
+  visibility: hidden
+
+.clearfix
+  zoom: 1
+
+.clearfix:before, .clearfix:after
+  content: ""
+  display: table
+
+.clearfix:after
+  clear: both
 
 body
-  font 14px arial, Helvetica, sans-serif
+  font 14px Arial, Helvetica, sans-serif
   background-color $body-color
   color $text-color
 *
@@ -14,11 +44,13 @@ body
     -moz-box-sizing: border-box
     box-sizing: border-box
 a
-  outline none!important
   text-decoration none
+a, button
+  outline none!important
   &:hover,
   &:focus
     text-decoration none
+
 .main-wr
   padding-top 103px
 .container
@@ -35,7 +67,7 @@ a
     display block
     width 100%
     margin-bottom 20px
-    padding 12px 17px
+    padding 0 17px
     border-radius $border-radius
     border-color $body-color
     height 40px
@@ -44,27 +76,8 @@ a
       outline none !important
   .btn
     display block
-    border-radius $border-radius
     margin-bottom 10px
-    padding 12px 25px
-    &:active
-      box-shadow inset 0 2px 0 rgba(0,0,0,0.15)
-    &-info
-      background-color $m-brand-blue-light
-      color #fff
-      &:hover, &:focus
-        background-color #1e8bbd
-    &-success
-      background-color $brand-success
-      color #fff
-      &:hover, &:focus
-        background-color #8bad24
-    &-default
-      background-color rgba(5, 127, 203, 0.1)
-      color $text-color
-      &:hover, &:focus
-        background-color rgba(5, 127, 203, 0.15)
-
+    border-radius $border-radius
   ul
     background-color #fff
     padding-left 0
@@ -83,15 +96,34 @@ a
       &:hover
         background-color rgba(5, 127, 203, 0.1)
         &:before
-          content '< / >'
+          content '< />'
           float right
       &.active
         color: #fff
         background-color $m-brand-blue-light
         &:before
-          content '< / >'
+          content '< />'
           float right
-
+.btn
+  padding 12px 25px
+  &:active
+    box-shadow inset 0 2px 0 rgba(0,0,0,0.15)
+  &-info
+    background-color $m-brand-blue-light
+    color #fff
+    &:hover, &:focus
+      background-color #1e8bbd
+  &-success
+    background-color $brand-success
+    border-radius $border-radius
+    color #fff
+    &:hover, &:focus
+      background-color #8bad24
+  &-default
+    background-color rgba(5, 127, 203, 0.1)
+    color $text-color
+    &:hover, &:focus
+      background-color rgba(5, 127, 203, 0.15)
 .content
   margin 0 0 20px 210px
   background-color #fff
@@ -103,6 +135,7 @@ input[type='text']
   width 100%
   &:focus
     outline none
+    border-color $brand-success
 
 h1
   background-color rgba(5, 127, 203, 0.1)
@@ -139,7 +172,7 @@ h2
     margin-bottom 10px
     border-radius $border-radius
     background-color $body-color
-    height 100px
+    height 104px
     border 1px dashed #ddd
     text-align center
     color #ddd
@@ -150,10 +183,10 @@ h2
       color rgba(5, 127, 203, 0.1)
       border-color rgba(5, 127, 203, 0.1)
 
-.color-var
+.var-value
   border 1px solid #ddd
   border-radius $border-radius
-  padding 0 5px
+  padding 2px 5px
 
 .font-family-card
   border-radius $border-radius
@@ -165,18 +198,47 @@ h2
   &.font-add-btn
     padding 0
     text-align center
+    &.full-width
+      width 100%
     a
       color #ddd
       display block
       border 1px dashed #ddd
       border-radius $border-radius
-      height 85px
+      height 89px
       line-height 85px
       font-size 70px
-
       &:hover
         color rgba(5, 127, 203, 0.1)
         border-color rgba(5, 127, 203, 0.1)
+
+.font-size-card
+  border-radius $border-radius
+  float left
+  background-color $body-color
+  width calc((100% / 3) - 10px)
+  margin 0 10px 20px 0
+  padding 20px 20px 10px 20px
+  &.multiple
+    label
+      > input
+        margin-bottom 15px
+  .font-inp
+    display inline-block
+    width 40px
+    margin-right 5px
+.example-card
+  height 104px
+  input
+    border 1px solid #ddd
+    box-shadow none
+    border-radius 4px
+    margin-top 12px
+    padding 11px 15px
+  .btn
+    border none
+    display block
+    margin 12px auto 0
 
 .font-inp
   border-radius $border-radius
@@ -184,6 +246,60 @@ h2
   background-color #fff
   padding 2px 5px
   margin-bottom 15px
+.table
+  width 100%
+  max-width 100%
+  border-radius $border-radius
+  border-collapse collapse
+  border-spacing 0
+  overflow-x auto
+  min-height 0.01%
+  tr
+    > th
+      background-color #ddd
+      border-right 1px solid #fff
+      &:last-child
+        border-right-color #ddd
+    > td
+      background-color #fff
+      border: 1px solid #ddd
+      a
+        color: $text-color
+        &:hover
+          color $m-brand-blue
+      span
+        font-size 85px
+        margin 4px 12px 0 -3px
+        display inline-block
+        height 23px
+        line-height 23px
+        overflow hidden
+        color #ddd
+  td, th
+    text-align left
+    padding 10px 10px 7px 10px
+    line-height 1.4
+    vertical-align middle
+.search-bar
+  .btn
+    display inline-block
+    border-radius $border-radius
+    margin-bottom 20px
+    color: #fff
+    font-size 18px
+    padding 8px 25px
+  label
+    display inline-block
+    margin 0 20px 20px 0
+    vertical-align top
+    width calc(50% - 88px)
+  input[type='text']
+    border-radius $border-radius
+    border 1px solid #ddd
+    font-size 18px
+    height 40px
+    padding 0 25px
+
 @media (min-width: 768px)
   .container
     width 750px
@@ -193,3 +309,14 @@ h2
 @media (min-width: 1200px)
   .container
     width 1170px
+
+@media (max-width: 767px)
+  .table
+    width 100%
+    overflow-y hidden
+    -ms-overflow-style -ms-autohiding-scrollbar
+    th, td
+      white-space nowrap
+  .search-bar
+    label
+      width calc(100% - 88px)

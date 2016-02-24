@@ -4,7 +4,7 @@
     angular
         .module('directive.grid', [
             'directive.topbar',
-            'directive.navigation'
+            'lbServices'
         ])
         .directive('grid', function () {
             return {
@@ -18,62 +18,10 @@
             }
         });
 
-    function GridCtrl() {
+    function GridCtrl(Packages) {
         var gridCtrl = this;
 
-        gridCtrl.package = {
-          colour : {
-            primary: [
-                {
-                    class: 'brand-primary',
-                    value: '#2780e3'
-                },
-                {
-                    class: 'brand-success',
-                    value: '#3fb618'
-                },
-                {
-                    class: 'brand-info',
-                    value: '#9954bb'
-                },
-                {
-                    class: 'brand-warning',
-                    value: '#ff7518'
-                },
-                {
-                    class: 'brand-danger',
-                    value: '#ff0039'
-                },
-                {
-                    class: 'brand-black',
-                    value: '#000'
-                }
-            ],
-            secondary: [
-                {
-                    class: 'brand-gray',
-                    value: '#eee'
-                }
-            ]
-          },
-          fonts: [{
-
-          }]
-        };
-
-        gridCtrl.packageNew = {
-            class: "",
-            value: ""
-        };
-
-
-        gridCtrl.getColourPrimary = function() {
-            return gridCtrl.package.colour.primary;
-        };
-
-        gridCtrl.getColourSecondary = function() {
-            return gridCtrl.package.colour.secondary;
-        };
+        gridCtrl.getPackages = Packages.find();
     }
 
 

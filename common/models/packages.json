@@ -11,6 +11,11 @@
       "required": true
     },
     "colour": {
+      "type": [[
+        "object"
+        ]]
+    },
+    "fonts": {
       "type": [
         "object"
       ]

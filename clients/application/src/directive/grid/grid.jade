@@ -1,41 +1,21 @@
 div
-    topbar
+    div.main-wr.container
+      div.search-bar
+        label
+          input(type='text' placeholder='Find Project by Name')
+        a(href='javascript:void(0);').btn.btn-info &#128270;
 
-    div.main-wr.container.clearfix
-        navigation
+      table.table
+        thead
+          tr
+            th(width=45) #
+            th Project Name
+            th Colour Palette Preview
 
-        div.content
-            h1 Colour Palette
-
-            h2 Primary Palette
-
-            div.colors-wrapp.clearfix
-
-                div(ng-repeat = "color in gridCtrl.getColourPrimary()").color-card
-                    label(style='background-color: {{color.value}}').color-inp-lbl
-                        input(type='text' ng-model='color.value' placeholder='add new').color-inp
-                    label
-                        input(type='text' ng-model='color.class' placeholder='add new').color-var
-
-                div.color-card
-                    label.color-inp-lbl
-                        input(type='text' ng-model='gridCtrl.packageNew.class' placeholder='#000000').color-inp
-                    label
-                        input(type='text' ng-model='gridCtrl.packageNew.value' placeholder='add new').color-var
-
-                div.color-card
-                    a(href="javascript:void(0);").color-inp-btn +
-
-
-            h2 Secondary Palette
-            div.colors-wrapp.clearfix
-                div(ng-repeat = "color in gridCtrl.getColourSecondary()").color-card
-                    label(style='background-color: {{color.value}}').color-inp-lbl
-                        input(type='text' ng-model='color.value' placeholder='add new').color-inp
-                    label
-                        input(type='text' ng-model='color.class' placeholder='add new').color-var
-
-                div.color-card
-                    a(href="javascript:void(0);").color-inp-btn +
-
-
+        tbody
+            tr(ng-repeat="package in gridCtrl.getPackages")
+              td {{package.id}}
+              td: a(href='/package/{{package.id}}')
+                | {{package.name}}
+              td
+                span(ng-repeat="color in package.colour" style="color: {{color.value}}") &bull;

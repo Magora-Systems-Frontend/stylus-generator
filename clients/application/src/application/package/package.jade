@@ -1,1 +1,41 @@
-| He will be our package
+div
+  topbar
+
+  div.main-wr.container.clearfix
+    navigation
+
+    div.content
+      h1 Colour Palette
+
+      div
+        h2 Primary Palette
+
+        div.colors-wrapp.clearfix
+          div(ng-repeat = "color in packageCtrl.getColourPrimary()").color-card
+            label(style='background-color: {{color.value}}').color-inp-lbl
+              input(type='text' ng-model='color.value' placeholder='add new').color-inp
+            label
+              input(type='text' ng-model='color.class' placeholder='add new').color-var
+
+          div.color-card
+            label.color-inp-lbl
+              input(type='text' ng-model='packageCtrl.packageNew.value' placeholder='#000000').color-inp
+            label
+              input(type='text' ng-model='packageCtrl.packageNew.class' placeholder='add new').color-var
+
+          div.color-card
+            a(ng-click="packageCtrl.addColourPrimary()").color-inp-btn +
+
+      div
+        h2 Secondary Palette
+        div.colors-wrapp.clearfix
+          div(ng-repeat = "color in packageCtrl.getColourSecondary()").color-card
+            label(style='background-color: {{color.value}}').color-inp-lbl
+              input(type='text' ng-model='color.value' placeholder='add new').color-inp
+            label
+              input(type='text' ng-model='color.class' placeholder='add new').color-var
+
+          div.color-card
+            a(href="javascript:void(0);").color-inp-btn +
+
+

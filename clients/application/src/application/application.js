@@ -3,14 +3,11 @@
 
     angular
         .module('application', [
-
             /* vendors */
             'angular-loading-bar',
-            'pascalprecht.translate',
             'ui.router',
             'ui.bootstrap',
             'ngResource',
-            'application.packages',
             'application.package',
             'directive.grid',
             'directive.navigation'
@@ -19,8 +16,7 @@
 
     function config(
         $stateProvider,
-        $locationProvider,
-        $translateProvider
+        $locationProvider
     ) {
         $locationProvider.html5Mode(true);
 
@@ -31,14 +27,6 @@
                 controller: AppCtrl,
                 controllerAs: "appCtrl"
             });
-
-        $translateProvider.useStaticFilesLoader({
-            prefix: '/translates/',
-            suffix: '.json'
-        });
-
-        $translateProvider.useSanitizeValueStrategy(null);
-        $translateProvider.preferredLanguage('ru-RU');
 
     }
 
