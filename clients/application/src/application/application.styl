@@ -1,37 +1,9 @@
 @import "../variables.styl"
-@import "normalize.styl"
-
-.uppercase
-  text-transform uppercase
-
-.full-width
-  width 100%
-
-
-.full-height
-  height 100%
-
-
-.v-a-top
-  vertical-align top
-
-
-.hidden
-  display: none !important
-  visibility: hidden
-
-.clearfix
-  zoom: 1
-
-.clearfix:before, .clearfix:after
-  content: ""
-  display: table
-
-.clearfix:after
-  clear: both
+@import "normalize"
+@import "helpers"
 
 body
-  font 14px Arial, Helvetica, sans-serif
+  font 14px arial, Helvetica, sans-serif
   background-color $body-color
   color $text-color
 *
@@ -285,7 +257,6 @@ h2
     display inline-block
     border-radius $border-radius
     margin-bottom 20px
-    color: #fff
     font-size 18px
     padding 8px 25px
   label

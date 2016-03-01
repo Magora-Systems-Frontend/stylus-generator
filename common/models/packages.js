@@ -2,6 +2,7 @@ const fs = require('fs');
 
 module.exports = function(Packages) {
 
+    // Method for saving data to file
     Packages.saveToFile = function(type, packageId, cb) {
       var regType = /scss,less,styl/i,
           response;
@@ -84,12 +85,25 @@ module.exports = function(Packages) {
 
         // get links on file
 
-        return link;
+          // send response (link to file)
+          cb(null, response)
+
       }
 
+    };
 
-      // send response (link to file)
-      cb(null, response)
+    // Method for getting data by id
+    Packages.getById = function(id, cb) {
+        var p1 = new Promise(
+            function(resolve, reject) {
+                resolve(Packages.findById(id))
+            });
+
+        p1.then(
+            function(data) {
+                console.log("work, sent to server");
+                cb(null, data);
+            });
 
     };
 
@@ -99,5 +113,13 @@ module.exports = function(Packages) {
         http: {path: '/tofile', verb: 'get'},
         returns: {arg: 'file', type: 'file'}
       }
+    );
+
+    Packages.remoteMethod(
+        'getById', {
+            accepts: [{arg: 'id', type: 'string'}],
+            http: {path: '/getById', verb: 'get'},
+            returns: {arg: 'package', type: 'object'}
+        }
     );
 };

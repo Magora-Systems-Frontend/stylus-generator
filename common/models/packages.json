@@ -10,15 +10,11 @@
       "type": "string",
       "required": true
     },
-    "colour": {
-      "type": [[
-        "object"
-        ]]
+    "colour":  {
+      "type": "object"
     },
     "fonts": {
-      "type": [
-        "object"
-      ]
+      "type": "object"
     }
   },
   "validations": [],

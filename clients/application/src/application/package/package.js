@@ -23,46 +23,47 @@
 
     // Controller of page
     function PackageCtrl(Packages, $stateParams) {
-      var packageCtrl = this;
+        var packageCtrl = this;
 
-      packageCtrl.package = Packages.findById($stateParams.id);
 
-      packageCtrl.packageNew = {
-        class: "",
-        value: ""
-      };
+       packageCtrl.package = Packages.getById($stateParams.id);
 
-      // packageNew should be as new package object which hold
-      // information about all new fields of app
+        packageCtrl.packageNew = {
+            class: "",
+            value: ""
+        };
 
-      // try to use ng-repeate as package.["colours"]
-      // it isn't cool, but it should improve our code
-      // also, each + should work with one function, which has one arg
-      // type of block, it's kind of addNew(package.["colour"])
-      // which save information from new package to legacy package
+        ///c  kageNew should be as new package object which hold
+        // information about all new fields of app
 
-      packageCtrl.getColourPrimary = function() {
-        return packageCtrl.package.colour.primary;
-      };
+        // try to use ng-repeate as package.["colours"]
+        // it isn't cool, but it should improve our code
+        // also, each + should work with one function, which has one arg
+        // type of block, it's kind of addNew(package.["colour"])
+        // which save information from new package to legacy package
 
-      // Add new colour, just for trigger without any params
-      // All holds in angular factory
 
-      packageCtrl.addColourPrimary = function() {
+        // Add new colour, just for trigger without any params
+        // All holds in angular factory
 
-        // kind of validation
-        if(true) {
-          // send to factory
-          var temp = packageCtrl.getColourPrimary();
-          // add new information
-          temp.push(packageCtrl.packageNew);
-          packageCtrl.packageNew = temp;
-        }
-      };
+        packageCtrl.addColourPrimary = function() {
 
-      packageCtrl.getColourSecondary = function() {
-        return packageCtrl.package.colour.secondary;
-      };
+            // kind of validation
+                // send to factory
+                var temp = packageCtrl.getColourPrimary();
+                // add new information
+                temp.push(packageCtrl.packageNew);
+                packageCtrl.packageNew = temp;
+        };
+
+        packageCtrl.getColourPrimary = function() {
+           console.log(packageCtrl.package);
+        //   return packageCtrl.package.colour["primary"];
+        };
+
+        packageCtrl.getColourSecondary = function() {
+          //  return packageCtrl.package.colour["secondary"];
+        };
     }
 
 
