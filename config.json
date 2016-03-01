@@ -16,7 +16,7 @@
     "jade": {
       "src": ["./develop/landings/**/*.jade"],
       "pages": [
-        "./develop/landings/page/view.jade"
+        "./develop/landings/page/page.jade"
       ],
       "dst": "",
       "options": {}
@@ -65,7 +65,7 @@
         "host": "localhost",
         "port": 8085,
         "open": false,
-        "fallback": "view.html"
+        "fallback": "page.html"
       }
     }
   }

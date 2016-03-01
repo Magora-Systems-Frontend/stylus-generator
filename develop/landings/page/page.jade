@@ -5,7 +5,7 @@ block body
         div.sidemenu
             +navigation
         div.content
-            h1 Colour Palette
+            h1.content-title Colour Palette
             h2 Primary Palette
             div.colors-wrapp.clearfix
                 - var colors = [{variable: 'brand-primary', value: '#2780e3'},{variable: 'brand-success', value: '#3fb618'},{variable: 'brand-info', value: '#9954bb'},{variable: 'brand-warning', value: '#ff7518'},{variable: 'brand-danger', value: '#ff0039'}]
@@ -34,7 +34,7 @@ block body
                 div.color-card
                     a(href="javascript:void(0);").color-inp-btn +
         div.content
-            h1 Fonts
+            h1.content-title Fonts
             h2 Font Family
             div.fonts-wrapp.clearfix
                 - var fontFamilies = [{variable: 'primary-font-family', value: '"Arial"'},{variable: '', value: ''}]
@@ -106,7 +106,7 @@ block body
                     a(href="javascript:void(0);") +
 
         div.content
-            h1 Border Radius
+            h1.content-title Border Radius
             h2 Primary Border Radius
             div.radius-wrapp.clearfix
                 div.font-size-card.multiple

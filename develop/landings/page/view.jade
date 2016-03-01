@@ -9,7 +9,6 @@ block body
         table.table
             thead
                 tr
-                    th(width=45) #
                     th Project Name
                     th Colour Palette Preview
 
@@ -17,7 +16,6 @@ block body
                 - var projects = [{projectName: 'Some test name'}, {projectName: 'Some gnfgngfnsng'}, {projectName: 'New & Awesome'}, {projectName: 'Test test888'}, {projectName: 'Some gnfgngfnsng'}, {projectName: '585544'}]
                     each project, index in projects
                         tr
-                            td= index + 1
                             td: a(href='javascript:void(0);')= project.projectName
                             td
                                 span.brand-primary &bull;
