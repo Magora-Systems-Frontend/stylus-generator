@@ -1,3 +1,13 @@
+Array.prototype.unique = function() {
+    var a = this.concat();
+    for(var i=0; i<a.length; ++i) {
+        for(var j=i+1; j<a.length; ++j) {
+            if(a[i] === a[j])
+                a.splice(j, 1);
+        }
+    }
+    return a;
+};
 (function (angular) {
     'use strict';
 
@@ -5,9 +15,7 @@
     angular
         .module('application', [
             /* vendors */
-            'angular-loading-bar',
             'ui.router',
-            'ui.bootstrap',
             'ngResource',
             'application.package',
             'directive.grid',
@@ -2069,32 +2077,6 @@ module
 (function (angular) {
     'use strict';
 
-    angular
-        .module('directive.navigation', [
-        ])
-        .directive('navigation', function () {
-            return {
-                templateUrl: 'directive/navigation/navigation.html',
-                replace: true,
-                restrict: 'E',
-                scope: true,
-                bindToController: true,
-                controller: NavigationCtrl,
-                controllerAs: 'navigationCtrl'
-            }
-        });
-
-    function NavigationCtrl() {
-        var navigationCtrl = this;
-
-    }
-
-
-})(angular);
-
-(function (angular) {
-    'use strict';
-
     GridCtrl.$inject = ["Packages"];
     angular
         .module('directive.grid', [
@@ -2148,13 +2130,28 @@ module
 
 })(angular);
 
-Array.prototype.unique = function() {
-    var a = this.concat();
-    for(var i=0; i<a.length; ++i) {
-        for(var j=i+1; j<a.length; ++j) {
-            if(a[i] === a[j])
-                a.splice(j, 1);
-        }
+(function (angular) {
+    'use strict';
+
+    angular
+        .module('directive.navigation', [
+        ])
+        .directive('navigation', function () {
+            return {
+                templateUrl: 'directive/navigation/navigation.html',
+                replace: true,
+                restrict: 'E',
+                scope: true,
+                bindToController: true,
+                controller: NavigationCtrl,
+                controllerAs: 'navigationCtrl'
+            }
+        });
+
+    function NavigationCtrl() {
+        var navigationCtrl = this;
+
     }
-    return a;
-};
+
+
+})(angular);

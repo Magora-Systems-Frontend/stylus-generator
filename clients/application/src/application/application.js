@@ -4,9 +4,7 @@
     angular
         .module('application', [
             /* vendors */
-            'angular-loading-bar',
             'ui.router',
-            'ui.bootstrap',
             'ngResource',
             'application.package',
             'directive.grid',
