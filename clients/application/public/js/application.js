@@ -1989,7 +1989,7 @@ module
     'use strict';
 
     config.$inject = ["$stateProvider"];
-    PackageCtrl.$inject = ["Packages", "$stateParams"];
+    PackageCtrl.$inject = ["Packages", "$stateParams", "$q"];
     angular
         .module('application.package', [
             'lbServices'
@@ -2011,52 +2011,87 @@ module
     }
 
     // Controller of page
-    function PackageCtrl(Packages, $stateParams) {
+    function PackageCtrl(Packages, $stateParams, $q) {
         var packageCtrl = this;
 
 
-       packageCtrl.package = Packages.getById($stateParams.id);
+        Packages.findById({id: $stateParams.id}, function(data){
+            packageCtrl.package = data;
+        });
+
 
         packageCtrl.packageNew = {
             class: "",
             value: ""
         };
 
-        ///c  kageNew should be as new package object which hold
-        // information about all new fields of app
+        packageCtrl.packageNewSecondary = {
+            class: "",
+            value: ""
+        };
 
-        // try to use ng-repeate as package.["colours"]
-        // it isn't cool, but it should improve our code
-        // also, each + should work with one function, which has one arg
-        // type of block, it's kind of addNew(package.["colour"])
-        // which save information from new package to legacy package
-
-
-        // Add new colour, just for trigger without any params
-        // All holds in angular factory
-
+        // Method for working with colours
         packageCtrl.addColourPrimary = function() {
+            // send to factory
+            var temp = packageCtrl.getColourPrimary();
+            // add new information
+            temp.push(packageCtrl.packageNew);
+            // save new version of project
+            packageCtrl.package.colour["primary"] = temp;
+            // clear object
+            packageCtrl.packageNew = {};
+        };
 
-            // kind of validation
-                // send to factory
-                var temp = packageCtrl.getColourPrimary();
-                // add new information
-                temp.push(packageCtrl.packageNew);
-                packageCtrl.packageNew = temp;
+        packageCtrl.addColourSecondary = function() {
+            // send to factory
+            var temp = packageCtrl.getColourSecondary();
+            // add new information
+            temp.push(packageCtrl.packageNewSecondary);
+            //
+            console.log(temp);
+            // save new version of project
+            packageCtrl.package.colour["secondary"] = temp;
+            // clear object
+            packageCtrl.packageNewSecondary = {};
         };
 
         packageCtrl.getColourPrimary = function() {
-           console.log(packageCtrl.package);
-        //   return packageCtrl.package.colour["primary"];
+           return packageCtrl.package.colour["primary"];
         };
 
         packageCtrl.getColourSecondary = function() {
-          //  return packageCtrl.package.colour["secondary"];
+            return packageCtrl.package.colour["secondary"];
         };
     }
 
 
 })(angular);
+(function (angular) {
+    'use strict';
+
+    angular
+        .module('directive.navigation', [
+        ])
+        .directive('navigation', function () {
+            return {
+                templateUrl: 'directive/navigation/navigation.html',
+                replace: true,
+                restrict: 'E',
+                scope: true,
+                bindToController: true,
+                controller: NavigationCtrl,
+                controllerAs: 'navigationCtrl'
+            }
+        });
+
+    function NavigationCtrl() {
+        var navigationCtrl = this;
+
+    }
+
+
+})(angular);
+
 (function (angular) {
     'use strict';
 
@@ -2107,32 +2142,6 @@ module
 
     function TopbarCtrl() {
         var topbarCtrl = this;
-
-    }
-
-
-})(angular);
-
-(function (angular) {
-    'use strict';
-
-    angular
-        .module('directive.navigation', [
-        ])
-        .directive('navigation', function () {
-            return {
-                templateUrl: 'directive/navigation/navigation.html',
-                replace: true,
-                restrict: 'E',
-                scope: true,
-                bindToController: true,
-                controller: NavigationCtrl,
-                controllerAs: 'navigationCtrl'
-            }
-        });
-
-    function NavigationCtrl() {
-        var navigationCtrl = this;
 
     }
 

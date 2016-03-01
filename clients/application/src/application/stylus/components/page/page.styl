@@ -1,0 +1,102 @@
+@import 'navigation'
+
+.color-card
+  border-radius $border-radius
+  float left
+  width calc((100% / 5) - 10px)
+  margin 0 10px 20px 0
+
+.color-inp
+  border-radius $border-radius
+  border 1px solid #fff
+  background-color #fff
+  padding 2px 5px
+
+.color-inp
+  &-lbl
+    display block
+    background-color $body-color
+    margin-bottom 10px
+    padding 40px 20px 10px 20px
+    border-radius $border-radius
+
+  &-btn
+    display block
+    margin-bottom 10px
+    border-radius $border-radius
+    background-color $body-color
+    height 104px
+    border 1px dashed #ddd
+    text-align center
+    color #ddd
+    font-size 70px
+    line-height 100px
+    padding 0
+    &:hover
+      color rgba(5, 127, 203, 0.1)
+      border-color rgba(5, 127, 203, 0.1)
+
+.var-value
+  border 1px solid #ddd
+  border-radius $border-radius
+  padding 2px 5px
+
+.font-family-card
+  border-radius $border-radius
+  float left
+  width calc((100% / 3) - 10px)
+  margin 0 10px 20px 0
+  padding 20px 20px 10px 20px
+  background-color $body-color
+  &.font-add-btn
+    padding 0
+    text-align center
+    &.full-width
+      width 100%
+    a
+      color #ddd
+      display block
+      border 1px dashed #ddd
+      border-radius $border-radius
+      height 89px
+      line-height 85px
+      font-size 70px
+      &:hover
+        color rgba(5, 127, 203, 0.1)
+        border-color rgba(5, 127, 203, 0.1)
+
+.font-size-card
+  border-radius $border-radius
+  float left
+  background-color $body-color
+  width calc((100% / 3) - 10px)
+  margin 0 10px 20px 0
+  padding 20px 20px 10px 20px
+  &.multiple
+    label
+      > input
+        margin-bottom 15px
+  .font-inp
+    display inline-block
+    width 40px
+    margin-right 5px
+
+.example-card
+  height 104px
+  input
+    border 1px solid #ddd
+    box-shadow none
+    border-radius 4px
+    margin-top 12px
+    padding 11px 15px
+  .btn
+    border none
+    display block
+    margin 12px auto 0
+
+.font-inp
+  border-radius $border-radius
+  border 1px solid #fff
+  background-color #fff
+  padding 2px 5px
+  margin-bottom 15px

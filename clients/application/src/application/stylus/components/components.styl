@@ -1,0 +1,91 @@
+// pages
+@import 'page/page'
+@import 'view/view'
+// components
+@import 'header/header'
+@import 'button'
+
+
+body
+  font 14px arial, Helvetica, sans-serif
+  background-color $body-color
+  color $text-color
+*
+  -webkit-box-sizing border-box
+  -moz-box-sizing border-box
+  box-sizing border-box
+  &:before,
+  &:after
+    -webkit-box-sizing: border-box
+    -moz-box-sizing: border-box
+    box-sizing: border-box
+
+a
+  text-decoration none
+
+a, button
+  outline none!important
+  &:hover,
+  &:focus
+    text-decoration none
+
+.main-wr
+  padding-top 103px
+
+.container
+  margin-right auto
+  margin-left auto
+  padding-left 15px
+  padding-right 15px
+
+
+
+
+.content
+  margin 0 0 20px 210px
+  background-color #fff
+  border-radius $border-radius
+  padding 10px 10px 10px 20px
+
+  &-title
+    background-color rgba(5, 127, 203, 0.1)
+    margin 15px -10px 15px -20px
+    padding 3px 0 3px 20px
+    font-size 24px
+
+input[type='text']
+  display block
+  width 100%
+  &:focus
+    outline none
+    border-color $brand-success
+
+
+h2
+  color #a2a2a2
+  font-size 18px
+h1,
+h2
+  font-weight normal
+
+
+@media (min-width: 768px)
+  .container
+    width 750px
+@media (min-width: 992px)
+  .container
+    width 970px
+@media (min-width: 1200px)
+  .container
+    width 1170px
+
+@media (max-width: 767px)
+  .table
+    width 100%
+    overflow-y hidden
+    -ms-overflow-style -ms-autohiding-scrollbar
+    th, td
+      white-space nowrap
+  .search-bar
+    label
+      width calc(100% - 88px)
