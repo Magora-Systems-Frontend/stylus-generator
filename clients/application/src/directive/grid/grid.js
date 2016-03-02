@@ -4,7 +4,7 @@
     angular
         .module('directive.grid', [
             'directive.topbar',
-            'lbServices'
+            'factory.packageStore'
         ])
         .directive('grid', function () {
             return {
@@ -18,10 +18,17 @@
             }
         });
 
-    function GridCtrl(Packages) {
+    function GridCtrl(PackageStore) {
         var gridCtrl = this;
 
-        gridCtrl.getPackages = Packages.find();
+
+        gridCtrl.getPackages = function() {
+            return PackageStore.getElems();
+        };
+
+        gridCtrl.packages = gridCtrl.getPackages();
+        gridCtrl.filter = "";
+
     }
 
 

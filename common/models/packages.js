@@ -92,20 +92,6 @@ module.exports = function(Packages) {
 
     };
 
-    // Method for getting data by id
-    Packages.getById = function(id, cb) {
-        var p1 = new Promise(
-            function(resolve, reject) {
-                resolve(Packages.findById(id))
-            });
-
-        p1.then(
-            function(data) {
-                console.log("work, sent to server");
-                cb(null, data);
-            });
-
-    };
 
     Packages.remoteMethod(
       'saveToFile', {

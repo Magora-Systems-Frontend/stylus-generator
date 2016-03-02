@@ -1,7 +1,7 @@
 div.main-wr.container
   div.search-bar
     label
-      input(type='text' placeholder='Find Project by Name')
+      input(type='text' placeholder='Find Project by Name' ng-model="gridCtrl.filter" ng-change="gridCtrl.actionFilter()")
     a(href='javascript:void(0);').btn.btn-info &#128270;
 
   table.table
@@ -11,7 +11,7 @@ div.main-wr.container
         th Colour Palette Preview
 
     tbody
-        tr(ng-repeat="package in gridCtrl.getPackages")
+        tr(ng-repeat="package in gridCtrl.packages")
           td: a(href='/package/{{package.id}}')
             | {{package.name}}
           td

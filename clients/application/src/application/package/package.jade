@@ -5,6 +5,10 @@ div
 
         navigation
 
+        // Try to work with directives
+
+        style-block(block-title = "Colour" block-type="colour")
+
         // Colour of palette
         div.content#colour
             h1.content-title Colour Palette
@@ -49,11 +53,98 @@ div
         // Fonts
         div.content#fonts
             h1.content-title Fonts
+                h2 Font Family
+                div.fonts-wrapp.clearfix
+                    div(ng-repeat = "font in packageCtrl.getFonts()").font-family-card
+                        label
+                            input(type='text' value="{{font.value}}" placeholder='"Arial"').font-inp
+                        label
+                            input(type='text' value="{{font.class}}"  placeholder='add new').var-value
 
+                    div.font-family-card
+                        label
+                            input(type='text' ng-model="packageCtrl.packageNewFont.value" placeholder='"Arial"').font-inp
+                        label
+                            input(type='text' ng-model="packageCtrl.packageNewFont.class"  placeholder='add new').var-value
+                    div.font-family-card.font-add-btn
+                        a(ng-click="packageCtrl.addFonts()") +
+                h2 Font Size
+                p Headings
+                div.fonts-wrapp.clearfix
+                    - var fontSizes = [{variable: 'font-size-h1', value: '26'}, {variable: 'font-size-h2', value: '22'}, {variable: 'font-size-h3', value: '20'}, {variable: 'font-size-h4', value: '18'}]
+                    each fontSize in fontSizes
+                        div.font-size-card
+                            label
+                                input(type='text' value=fontSize.value placeholder='15').font-inp
+                                | px
+                            label
+                                input(type='text' value=fontSize.variable placeholder='font-size-h*').var-value
+                    div.font-size-card
+                        label
+                            input(type='text' placeholder='14').font-inp
+                            | px
+                        label
+                            input(type='text' placeholder='font-size-h*').var-value
+                    div.font-family-card.font-add-btn
+                        a(href="javascript:void(0);") +
+
+                p Example Body Text
+                div.fonts-wrapp.clearfix
+                    div.font-size-card.multiple
+                        label
+                            input(type='text' value="14" placeholder='14').font-inp
+                            | px
+                        label
+                            input(type='text' value="main-font-size" placeholder='main-font-size').var-value
+                        label
+                            input(type='text' value="#000000" placeholder='#000000').color-inp
+                        label
+                            input(type='text' value="main-font-color" placeholder='main-font-color').var-value
+
+                    div(style='color: #000000; font-size: 14px') London is the capital of the United Kingdom of Great Britain and Northern Ireland. It is the largest city in Europe and one of the largest cities in the world with the population of 11 million people. About a fifth of the total population of the UK lives in the Greater London area, that is London and its suburbs.
+
+
+                p Muted Text
+                div.fonts-wrapp.clearfix
+                    div.font-family-card
+                        label
+                            input(type='text' value="#999999" placeholder='#999999').font-inp
+                        label
+                            input(type='text' value="muted-text-color" placeholder='muted-text-color').var-value
+
+                    div(style='color: #999999') London is the capital of the United Kingdom of Great Britain and Northern Ireland. It is the largest city in Europe and one of the largest cities in the world with the population of 11 million people. About a fifth of the total population of the UK lives in the Greater London area, that is London and its suburbs.
+
+                p Some Other Text
+                div.fonts-wrapp.clearfix
+                    div.font-family-card
+                        label
+                            input(type='text' value="#" placeholder='#dddddd').font-inp
+                        label
+                            input(type='text' placeholder='add-new-text-color').var-value
+
+                    div(style='color: #dddddd') London is the capital of the United Kingdom of Great Britain and Northern Ireland. It is the largest city in Europe and one of the largest cities in the world with the population of 11 million people. About a fifth of the total population of the UK lives in the Greater London area, that is London and its suburbs.
+                div.clearfix
+                    div.font-family-card.font-add-btn.full-width
+                        a(href="javascript:void(0);") +
 
         // Borders
         div.content#borders
-            h1.content-title Borders
+            h1.content-title Border Radius
+                h2 Primary Border Radius
+                div.radius-wrapp.clearfix
+                    div.font-size-card.multiple
+                        label
+                            input(type='text' ng-model="packageCtrl.newBorder.size" placeholder='14').font-inp
+                            | px
+                        label
+                            input(type='text' ng-model="packageCtrl.newBorder.class" placeholder='main-border-radius').var-value
+
+                    div.font-size-card.example-card
+                        label
+                            input(type='text' value='Input example' style='border-radius: {{packageCtrl.newBorder.size + "px"}}')
+
+                    div.font-size-card.example-card
+                        button.btn.btn-success(type='button' style='border-radius: {{packageCtrl.newBorder.size + "px"}}') Button example
 
 
 

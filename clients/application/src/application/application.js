@@ -8,7 +8,8 @@
             'ngResource',
             'application.package',
             'directive.grid',
-            'directive.navigation'
+            'directive.navigation',
+            'factory.packageStore'
         ])
         .config(config);
 

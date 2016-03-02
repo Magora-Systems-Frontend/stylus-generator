@@ -19,7 +19,8 @@ Array.prototype.unique = function() {
             'ngResource',
             'application.package',
             'directive.grid',
-            'directive.navigation'
+            'directive.navigation',
+            'factory.packageStore'
         ])
         .config(config);
 
@@ -45,7 +46,53 @@ Array.prototype.unique = function() {
 
 
 })(angular);
-// Here's all information about application state
+(function (angular) {
+    'use strict';
+
+    PackageStore.$inject = ["Packages"];
+    angular
+        .module('factory.packageStore', [
+            'lbServices'
+        ])
+        .factory('PackageStore', PackageStore);
+
+    function PackageStore(Packages) {
+
+        var packageStore = this;
+
+        packageStore.elems = Packages.find();
+        packageStore.elem = {};
+
+        // Set current package for working
+        packageStore.setElem = function(id) {
+            Packages.findById({id: id}, function(data){
+                packageStore.elem = data;
+            });
+        };
+
+        // Get part of package for working in directives
+        packageStore.getByType = function(type) {
+            console.log(type);
+        };
+
+        // Getting all element of package
+        packageStore.getElems = function() {
+            return packageStore.elems;
+        };
+
+        // Save current package in file with type
+        packageStore.saveToFile = function(type) {
+            console.log("Try to save package to file")
+        };
+
+        return {
+            getByType: packageStore.getByType,
+            getElems: packageStore.getElems,
+            setElem: packageStore.setElem
+        }
+    }
+
+})(angular);
 
 (function(window, angular, undefined) {'use strict';
 
@@ -2000,7 +2047,8 @@ module
     PackageCtrl.$inject = ["Packages", "$stateParams", "$q"];
     angular
         .module('application.package', [
-            'lbServices'
+            'lbServices',
+            'directive.styleBlock'
         ])
         .config(config);
 
@@ -2038,6 +2086,19 @@ module
             value: ""
         };
 
+        packageCtrl.packageNewFont = {
+            class: "",
+            value: ""
+        };
+
+        packageCtrl.getStyleBlock = function(type) {
+            console.log(type);
+            return this.package[type];
+        };
+
+
+
+
         // Method for working with colours
         packageCtrl.addColourPrimary = function() {
             // send to factory
@@ -2055,8 +2116,6 @@ module
             var temp = packageCtrl.getColourSecondary();
             // add new information
             temp.push(packageCtrl.packageNewSecondary);
-            //
-            console.log(temp);
             // save new version of project
             packageCtrl.package.colour["secondary"] = temp;
             // clear object
@@ -2070,6 +2129,38 @@ module
         packageCtrl.getColourSecondary = function() {
             return packageCtrl.package.colour["secondary"];
         };
+
+        // -- Fonts
+
+        packageCtrl.getFonts = function() {
+            return packageCtrl.package.fonts["family"];
+        };
+
+        packageCtrl.addFonts= function() {
+            var temp, testTemp;
+            // send to factory
+            temp = ((testTemp = packageCtrl.getFonts()) != undefined ? testTemp : []);
+            // add new information
+            temp.push(packageCtrl.packageNewFont);
+            // save new version of project
+            packageCtrl.package.fonts["family"] = temp;
+            // clear object
+            packageCtrl.packageNewFont = {};
+        };
+
+
+        packageCtrl.fontSize = {
+
+        };
+
+
+
+        // --- Borders
+
+        packageCtrl.newBorder = {
+            size: "14",
+            class: "border-example"
+        }
     }
 
 
@@ -2077,11 +2168,37 @@ module
 (function (angular) {
     'use strict';
 
-    GridCtrl.$inject = ["Packages"];
+    angular
+        .module('directive.card', [
+        ])
+        .directive('card', function () {
+            return {
+                templateUrl: 'directive/card/card.html',
+                replace: true,
+                restrict: 'E',
+                scope: true,
+                bindToController: true,
+                controller: cardCtrl,
+                controllerAs: 'cardCtrl'
+            }
+        });
+
+    function cardCtrl() {
+        var cardCtrl = this;
+
+    }
+
+
+})(angular);
+
+(function (angular) {
+    'use strict';
+
+    GridCtrl.$inject = ["PackageStore"];
     angular
         .module('directive.grid', [
             'directive.topbar',
-            'lbServices'
+            'factory.packageStore'
         ])
         .directive('grid', function () {
             return {
@@ -2095,35 +2212,16 @@ module
             }
         });
 
-    function GridCtrl(Packages) {
+    function GridCtrl(PackageStore) {
         var gridCtrl = this;
 
-        gridCtrl.getPackages = Packages.find();
-    }
 
+        gridCtrl.getPackages = function() {
+            return PackageStore.getElems();
+        };
 
-})(angular);
-
-(function (angular) {
-    'use strict';
-
-    angular
-        .module('directive.topbar', [
-        ])
-        .directive('topbar', function () {
-            return {
-                templateUrl: 'directive/topbar/topbar.html',
-                replace: true,
-                restrict: 'E',
-                scope: true,
-                bindToController: true,
-                controller: TopbarCtrl,
-                controllerAs: 'topbarCtrl'
-            }
-        });
-
-    function TopbarCtrl() {
-        var topbarCtrl = this;
+        gridCtrl.packages = gridCtrl.getPackages();
+        gridCtrl.filter = "";
 
     }
 
@@ -2150,6 +2248,76 @@ module
 
     function NavigationCtrl() {
         var navigationCtrl = this;
+
+    }
+
+
+})(angular);
+
+(function (angular) {
+    'use strict';
+
+    styleBlockCtrl.$inject = ["$attrs", "PackageStore"];
+    angular
+        .module('directive.styleBlock', [
+            'directive.card',
+            'factory.packageStore'
+        ])
+        .directive('styleBlock', function () {
+            return {
+                templateUrl: 'directive/styleBlock/styleBlock.html',
+                replace: true,
+                restrict: 'E',
+                scope: true,
+                bindToController: true,
+                controller: styleBlockCtrl,
+                controllerAs: 'styleBlockCtrl'
+            }
+        });
+
+    function styleBlockCtrl($attrs, PackageStore) {
+        var styleBlockCtrl = this;
+
+
+        styleBlockCtrl.temp = {
+          value: "",
+          class: ""
+        };
+
+        styleBlockCtrl.getCards = function() {
+            PackageStore.getByType($attrs.blockType);
+        };
+
+        styleBlockCtrl.addCard = function() {
+            console.log(styleBlockCtrl.temp);
+        };
+
+
+    }
+
+
+})(angular);
+
+(function (angular) {
+    'use strict';
+
+    angular
+        .module('directive.topbar', [
+        ])
+        .directive('topbar', function () {
+            return {
+                templateUrl: 'directive/topbar/topbar.html',
+                replace: true,
+                restrict: 'E',
+                scope: true,
+                bindToController: true,
+                controller: TopbarCtrl,
+                controllerAs: 'topbarCtrl'
+            }
+        });
+
+    function TopbarCtrl() {
+        var topbarCtrl = this;
 
     }
 
