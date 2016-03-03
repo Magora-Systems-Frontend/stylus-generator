@@ -21,6 +21,7 @@
     function styleBlockCtrl($attrs, PackageStore) {
         var styleBlockCtrl = this;
 
+        styleBlockCtrl.title = $attrs.blockTitle;
 
         styleBlockCtrl.temp = {
           value: "",
@@ -28,12 +29,15 @@
         };
 
         styleBlockCtrl.getCards = function() {
-            PackageStore.getByType($attrs.blockType);
+            return PackageStore.getByType($attrs.blockType);
         };
 
         styleBlockCtrl.addCard = function() {
-            console.log(styleBlockCtrl.temp);
+            PackageStore.saveByType($attrs.blockType, angular.copy(styleBlockCtrl.temp));
+            styleBlockCtrl.temp = {};
         };
+
+        PackageStore.setElem()
 
 
     }

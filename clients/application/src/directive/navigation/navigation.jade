@@ -5,10 +5,9 @@ div.sidemenu
                 li: a(href='#' + val)= val
 
 
-    select
+    select(ng-model="navCtrl.objectType")
         each type in ['.styl', '.less', '.scss']
-            option: = type
+                option: = type
 
-    a.btn.btn-default edit
-    a.btn.btn-success save
-    a.btn.btn-info create .styl file
+    a.btn.btn-success(ng-click="navCtrl.actionCreateFile()") save
+    a.btn.btn-info(ng-click="navCtrl.actionSavePackage()") create {{navCtrl.objectType}} file

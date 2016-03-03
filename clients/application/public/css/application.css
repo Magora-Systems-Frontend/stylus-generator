@@ -1551,7 +1551,6 @@ th {
 
 
 
-
 .sidemenu {
   width: 190px;
   float: left;
@@ -1634,6 +1633,7 @@ th {
   content: '< / >';
   float: right;
 }
+
 
 
 class {

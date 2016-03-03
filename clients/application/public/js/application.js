@@ -63,6 +63,39 @@ Array.prototype.unique = function() {
         packageStore.elems = Packages.find();
         packageStore.elem = {};
 
+        // -- Utils
+        var getPartOfObject = function(obj, type) {
+            var types = type.split(",");
+
+            for(var i = 0, length = types.length; i < length; i++) {
+                obj = obj[types[i].trim()];
+            }
+            return obj;
+        };
+
+        var setPartToObject = function(data, type) {
+            var types = type.split(",");
+            var tempObj = {};
+            var newObj = tempObj;
+
+            // create new object, which will be extend our data
+            for(var i = 0, length = types.length; i < length - 1; i++) {
+                tempObj[types[i].trim()] = {};
+                tempObj = tempObj[types[i].trim()];
+            }
+
+            // most nested element hold our data
+            tempObj = tempObj[types[length-1].trim()] = data;
+
+            console.log(packageStore.elem, newObj);
+
+            // save
+            angular.merge(packageStore.elem, newObj);
+        };
+
+
+        // -- Api
+
         // Set current package for working
         packageStore.setElem = function(id) {
             Packages.findById({id: id}, function(data){
@@ -72,7 +105,21 @@ Array.prototype.unique = function() {
 
         // Get part of package for working in directives
         packageStore.getByType = function(type) {
-            console.log(type);
+            return getPartOfObject(packageStore.elem, type);
+        };
+
+        // Save part of package
+        packageStore.saveByType = function(type, data) {
+            // create new array, which hold all elements
+            // it's array
+            var existArray = getPartOfObject(packageStore.elem, type);
+
+
+            existArray.push(data);
+
+            setPartToObject(existArray, type);
+
+           // add new to file
         };
 
         // Getting all element of package
@@ -87,6 +134,7 @@ Array.prototype.unique = function() {
 
         return {
             getByType: packageStore.getByType,
+            saveByType: packageStore.saveByType,
             getElems: packageStore.getElems,
             setElem: packageStore.setElem
         }
@@ -2044,11 +2092,12 @@ module
     'use strict';
 
     config.$inject = ["$stateProvider"];
-    PackageCtrl.$inject = ["Packages", "$stateParams", "$q"];
+    PackageCtrl.$inject = ["Packages", "$stateParams", "PackageStore", "$q"];
     angular
         .module('application.package', [
             'lbServices',
-            'directive.styleBlock'
+            'directive.styleBlock',
+            'factory.packageStore'
         ])
         .config(config);
 
@@ -2067,91 +2116,10 @@ module
     }
 
     // Controller of page
-    function PackageCtrl(Packages, $stateParams, $q) {
+    function PackageCtrl(Packages, $stateParams, PackageStore, $q) {
         var packageCtrl = this;
 
-
-        Packages.findById({id: $stateParams.id}, function(data){
-            packageCtrl.package = data;
-        });
-
-
-        packageCtrl.packageNew = {
-            class: "",
-            value: ""
-        };
-
-        packageCtrl.packageNewSecondary = {
-            class: "",
-            value: ""
-        };
-
-        packageCtrl.packageNewFont = {
-            class: "",
-            value: ""
-        };
-
-        packageCtrl.getStyleBlock = function(type) {
-            console.log(type);
-            return this.package[type];
-        };
-
-
-
-
-        // Method for working with colours
-        packageCtrl.addColourPrimary = function() {
-            // send to factory
-            var temp = packageCtrl.getColourPrimary();
-            // add new information
-            temp.push(packageCtrl.packageNew);
-            // save new version of project
-            packageCtrl.package.colour["primary"] = temp;
-            // clear object
-            packageCtrl.packageNew = {};
-        };
-
-        packageCtrl.addColourSecondary = function() {
-            // send to factory
-            var temp = packageCtrl.getColourSecondary();
-            // add new information
-            temp.push(packageCtrl.packageNewSecondary);
-            // save new version of project
-            packageCtrl.package.colour["secondary"] = temp;
-            // clear object
-            packageCtrl.packageNewSecondary = {};
-        };
-
-        packageCtrl.getColourPrimary = function() {
-           return packageCtrl.package.colour["primary"];
-        };
-
-        packageCtrl.getColourSecondary = function() {
-            return packageCtrl.package.colour["secondary"];
-        };
-
-        // -- Fonts
-
-        packageCtrl.getFonts = function() {
-            return packageCtrl.package.fonts["family"];
-        };
-
-        packageCtrl.addFonts= function() {
-            var temp, testTemp;
-            // send to factory
-            temp = ((testTemp = packageCtrl.getFonts()) != undefined ? testTemp : []);
-            // add new information
-            temp.push(packageCtrl.packageNewFont);
-            // save new version of project
-            packageCtrl.package.fonts["family"] = temp;
-            // clear object
-            packageCtrl.packageNewFont = {};
-        };
-
-
-        packageCtrl.fontSize = {
-
-        };
+        PackageStore.setElem($stateParams.id);
 
 
 
@@ -2241,13 +2209,26 @@ module
                 restrict: 'E',
                 scope: true,
                 bindToController: true,
-                controller: NavigationCtrl,
-                controllerAs: 'navigationCtrl'
+                controller: NavCtrl,
+                controllerAs: 'navCtrl'
             }
         });
 
-    function NavigationCtrl() {
-        var navigationCtrl = this;
+    function NavCtrl() {
+        var navCtrl = this;
+
+        navCtrl.objectType = ".styl";
+
+        // Action for creating file
+        navCtrl.actionCreateFile = function(){
+            alert("create");
+        };
+
+        // Action for saving file
+        navCtrl.actionSavePackage = function() {
+            alert("save");
+        }
+
 
     }
 
@@ -2278,6 +2259,7 @@ module
     function styleBlockCtrl($attrs, PackageStore) {
         var styleBlockCtrl = this;
 
+        styleBlockCtrl.title = $attrs.blockTitle;
 
         styleBlockCtrl.temp = {
           value: "",
@@ -2285,12 +2267,15 @@ module
         };
 
         styleBlockCtrl.getCards = function() {
-            PackageStore.getByType($attrs.blockType);
+            return PackageStore.getByType($attrs.blockType);
         };
 
         styleBlockCtrl.addCard = function() {
-            console.log(styleBlockCtrl.temp);
+            PackageStore.saveByType($attrs.blockType, angular.copy(styleBlockCtrl.temp));
+            styleBlockCtrl.temp = {};
         };
+
+        PackageStore.setElem()
 
 
     }

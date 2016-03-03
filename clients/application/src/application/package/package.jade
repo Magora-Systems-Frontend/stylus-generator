@@ -1,92 +1,23 @@
 div
     topbar
 
-    div(ng-if="packageCtrl.package").main-wr.container.clearfix
+    div().main-wr.container.clearfix
 
-        navigation
+        navigation(package-id="{{}}")
 
-        // Try to work with directives
-
-        style-block(block-title = "Colour" block-type="colour")
-
-        // Colour of palette
-        div.content#colour
+        // Colour
+        div.content
             h1.content-title Colour Palette
 
-            div
-                h2 Primary Palette
-
-                div.colors-wrapp.clearfix
-                    div(ng-repeat = "color in packageCtrl.getColourPrimary()").color-card
-                        label(style='background-color: {{color.value}}').color-inp-lbl
-                            input(type='text' ng-model='color.value' placeholder='add new').color-inp
-                        label
-                            input(type='text' ng-model='color.class' placeholder='add new').color-var
-
-                    div.color-card
-                        label(style='background-color: {{packageCtrl.packageNew.value}}').color-inp-lbl
-                            input(type='text' ng-model='packageCtrl.packageNew.value' placeholder='#000000').color-inp
-                        label
-                            input(type='text' ng-model='packageCtrl.packageNew.class' placeholder='add new').color-var
-
-                    div.color-card
-                        a(ng-click="packageCtrl.addColourPrimary()").color-inp-btn +
-
-            div
-                h2 Secondary Palette
-                div.colors-wrapp.clearfix
-                    div(ng-repeat = "color in packageCtrl.getColourSecondary()").color-card
-                        label(style='background-color: {{color.value}}').color-inp-lbl
-                            input(type='text' ng-model='color.value' placeholder='add new').color-inp
-                        label
-                            input(type='text' ng-model='color.class' placeholder='add new').color-var
-
-                    div.color-card
-                        label(style='background-color: {{packageCtrl.packageNewSecondary.value}}').color-inp-lbl
-                            input(type='text' ng-model='packageCtrl.packageNewSecondary.value' placeholder='#000000').color-inp
-                        label
-                            input(type='text' ng-model='packageCtrl.packageNewSecondary.class' placeholder='add new').color-var
-                    div.color-card
-                        a(ng-click="packageCtrl.addColourSecondary()").color-inp-btn +
+            style-block(block-title = "Primary Palette" block-type="colour, primary")
+            style-block(block-title = "Secondary Palette" block-type="colour, secondary")
 
 
         // Fonts
         div.content#fonts
-            h1.content-title Fonts
-                h2 Font Family
-                div.fonts-wrapp.clearfix
-                    div(ng-repeat = "font in packageCtrl.getFonts()").font-family-card
-                        label
-                            input(type='text' value="{{font.value}}" placeholder='"Arial"').font-inp
-                        label
-                            input(type='text' value="{{font.class}}"  placeholder='add new').var-value
-
-                    div.font-family-card
-                        label
-                            input(type='text' ng-model="packageCtrl.packageNewFont.value" placeholder='"Arial"').font-inp
-                        label
-                            input(type='text' ng-model="packageCtrl.packageNewFont.class"  placeholder='add new').var-value
-                    div.font-family-card.font-add-btn
-                        a(ng-click="packageCtrl.addFonts()") +
-                h2 Font Size
-                p Headings
-                div.fonts-wrapp.clearfix
-                    - var fontSizes = [{variable: 'font-size-h1', value: '26'}, {variable: 'font-size-h2', value: '22'}, {variable: 'font-size-h3', value: '20'}, {variable: 'font-size-h4', value: '18'}]
-                    each fontSize in fontSizes
-                        div.font-size-card
-                            label
-                                input(type='text' value=fontSize.value placeholder='15').font-inp
-                                | px
-                            label
-                                input(type='text' value=fontSize.variable placeholder='font-size-h*').var-value
-                    div.font-size-card
-                        label
-                            input(type='text' placeholder='14').font-inp
-                            | px
-                        label
-                            input(type='text' placeholder='font-size-h*').var-value
-                    div.font-family-card.font-add-btn
-                        a(href="javascript:void(0);") +
+                h1.content-title Fonts
+                style-block(block-title = "Font family" block-type="fonts, font-family")
+                style-block(block-title = "Font size" block-type="fonts, font-size")
 
                 p Example Body Text
                 div.fonts-wrapp.clearfix

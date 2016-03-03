@@ -11,13 +11,26 @@
                 restrict: 'E',
                 scope: true,
                 bindToController: true,
-                controller: NavigationCtrl,
-                controllerAs: 'navigationCtrl'
+                controller: NavCtrl,
+                controllerAs: 'navCtrl'
             }
         });
 
-    function NavigationCtrl() {
-        var navigationCtrl = this;
+    function NavCtrl() {
+        var navCtrl = this;
+
+        navCtrl.objectType = ".styl";
+
+        // Action for creating file
+        navCtrl.actionCreateFile = function(){
+            alert("create");
+        };
+
+        // Action for saving file
+        navCtrl.actionSavePackage = function() {
+            alert("save");
+        }
+
 
     }
 

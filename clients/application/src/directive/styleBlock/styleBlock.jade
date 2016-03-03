@@ -1,17 +1,15 @@
-div.content#colour
-    h1.content-title Colour Palette
 
-    div
-        h2 Primary Palette
+div
+    h2 {{styleBlockCtrl.title}}
 
-        div.colors-wrapp.clearfix
-            card(ng-repeat = "card in styleBlockCtrl.getCards()")
+    div.colors-wrapp.clearfix
+        card(ng-repeat = "card in styleBlockCtrl.getCards()")
 
-            div.color-card
-                label(style='background-color: {{styleBlockCtrl.temp.value}}').color-inp-lbl
-                    input(type='text' ng-model='styleBlockCtrl.temp.value' placeholder='#000000').color-inp
-                label
-                    input(type='text' ng-model='styleBlockCtrl.temp.class' placeholder='add new').color-var
+        div.color-card
+            label(style='background-color: {{styleBlockCtrl.temp.value}}').color-inp-lbl
+                input(type='text' ng-model='styleBlockCtrl.temp.value' placeholder='#000000').color-inp
+            label
+                input(type='text' ng-model='styleBlockCtrl.temp.class' placeholder='add new').color-var
 
-            div.color-card
-                a(ng-click="styleBlockCtrl.addCard()").color-inp-btn +
+        div.color-card
+            a(ng-click="styleBlockCtrl.addCard()").color-inp-btn +
