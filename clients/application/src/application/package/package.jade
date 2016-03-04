@@ -1,81 +1,39 @@
 div
     topbar
 
-    div().main-wr.container.clearfix
+    div(ng-if="packageCtrl.package").main-wr.container.clearfix
 
         navigation(package-id="{{}}")
 
-        // Colour
-        div.content
-            h1.content-title Colour Palette
+        div.content-wrapper
 
-            style-block(block-title = "Primary Palette" block-type="colour, primary")
-            style-block(block-title = "Secondary Palette" block-type="colour, secondary")
+            div.content-description
+                h1.content__title
+                    | {{packageCtrl.package.name}}
+                    a (edit)
 
 
-        // Fonts
-        div.content#fonts
+            // Colour
+            div.content#colour
+                h1.content-title Colour Palette
+
+                colour(block-title = "Primary Palette" block-type="colour, primary")
+                colour(block-title = "Secondary Palette" block-type="colour, secondary")
+
+
+            // Fonts
+            div.content#fonts
                 h1.content-title Fonts
-                style-block(block-title = "Font family" block-type="fonts, font-family")
-                style-block(block-title = "Font size" block-type="fonts, font-size")
 
-                p Example Body Text
-                div.fonts-wrapp.clearfix
-                    div.font-size-card.multiple
-                        label
-                            input(type='text' value="14" placeholder='14').font-inp
-                            | px
-                        label
-                            input(type='text' value="main-font-size" placeholder='main-font-size').var-value
-                        label
-                            input(type='text' value="#000000" placeholder='#000000').color-inp
-                        label
-                            input(type='text' value="main-font-color" placeholder='main-font-color').var-value
-
-                    div(style='color: #000000; font-size: 14px') London is the capital of the United Kingdom of Great Britain and Northern Ireland. It is the largest city in Europe and one of the largest cities in the world with the population of 11 million people. About a fifth of the total population of the UK lives in the Greater London area, that is London and its suburbs.
+                fonts(block-title = "Font family" block-type="fonts, font-family")
+                fonts-size(block-title = "Font size" block-type="fonts, font-size")
+                fonts-custom(block-title = "" block-type="fonts, font-custom")
 
 
-                p Muted Text
-                div.fonts-wrapp.clearfix
-                    div.font-family-card
-                        label
-                            input(type='text' value="#999999" placeholder='#999999').font-inp
-                        label
-                            input(type='text' value="muted-text-color" placeholder='muted-text-color').var-value
-
-                    div(style='color: #999999') London is the capital of the United Kingdom of Great Britain and Northern Ireland. It is the largest city in Europe and one of the largest cities in the world with the population of 11 million people. About a fifth of the total population of the UK lives in the Greater London area, that is London and its suburbs.
-
-                p Some Other Text
-                div.fonts-wrapp.clearfix
-                    div.font-family-card
-                        label
-                            input(type='text' value="#" placeholder='#dddddd').font-inp
-                        label
-                            input(type='text' placeholder='add-new-text-color').var-value
-
-                    div(style='color: #dddddd') London is the capital of the United Kingdom of Great Britain and Northern Ireland. It is the largest city in Europe and one of the largest cities in the world with the population of 11 million people. About a fifth of the total population of the UK lives in the Greater London area, that is London and its suburbs.
-                div.clearfix
-                    div.font-family-card.font-add-btn.full-width
-                        a(href="javascript:void(0);") +
-
-        // Borders
-        div.content#borders
-            h1.content-title Border Radius
-                h2 Primary Border Radius
-                div.radius-wrapp.clearfix
-                    div.font-size-card.multiple
-                        label
-                            input(type='text' ng-model="packageCtrl.newBorder.size" placeholder='14').font-inp
-                            | px
-                        label
-                            input(type='text' ng-model="packageCtrl.newBorder.class" placeholder='main-border-radius').var-value
-
-                    div.font-size-card.example-card
-                        label
-                            input(type='text' value='Input example' style='border-radius: {{packageCtrl.newBorder.size + "px"}}')
-
-                    div.font-size-card.example-card
-                        button.btn.btn-success(type='button' style='border-radius: {{packageCtrl.newBorder.size + "px"}}') Button example
+            // Borders
+            div.content#borders
+                h1.content-title Border Radius
+                borders(block-title = "Border radius" block-type="borders, standart")
 
 
 

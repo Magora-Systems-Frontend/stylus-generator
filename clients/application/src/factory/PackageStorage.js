@@ -19,7 +19,7 @@
             var types = type.split(",");
 
             for(var i = 0, length = types.length; i < length; i++) {
-                obj = obj[types[i].trim()];
+                obj = obj[types[i].trim()] || [];
             }
             return obj;
         };
@@ -78,6 +78,11 @@
             return packageStore.elems;
         };
 
+        // Getting current element
+        packageStore.getElem = function() {
+            return packageStore.elem;
+        };
+
         // Save current package in file with type
         packageStore.saveToFile = function(type) {
             console.log("Try to save package to file")
@@ -87,7 +92,8 @@
             getByType: packageStore.getByType,
             saveByType: packageStore.saveByType,
             getElems: packageStore.getElems,
-            setElem: packageStore.setElem
+            setElem: packageStore.setElem,
+            getElem: packageStore.getElem
         }
     }
 

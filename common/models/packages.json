@@ -15,6 +15,9 @@
     },
     "fonts": {
       "type": "object"
+    },
+    "borders": {
+      "type": "object"
     }
   },
   "validations": [],

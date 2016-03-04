@@ -532,10 +532,12 @@ button:focus {
   padding-right: 15px;
 }
 .content {
-  margin: 0 0 20px 210px;
   background-color: #fff;
   border-radius: 4px;
   padding: 10px 10px 10px 20px;
+}
+.content-wrapper {
+  margin: 0 0 20px 210px;
 }
 .content-title {
   background-color: rgba(5,127,203,0.1);
@@ -589,7 +591,6 @@ h2 {
     width: calc(100% - 88px);
   }
 }
-
 
 
 .uppercase {
@@ -1153,10 +1154,12 @@ button:focus {
   padding-right: 15px;
 }
 .content {
-  margin: 0 0 20px 210px;
   background-color: #fff;
   border-radius: 4px;
   padding: 10px 10px 10px 20px;
+}
+.content-wrapper {
+  margin: 0 0 20px 210px;
 }
 .content-title {
   background-color: rgba(5,127,203,0.1);
@@ -1551,6 +1554,27 @@ th {
 
 
 
+
+
+
+
+
+
+class {
+  display: block;
+}
+.header {
+  background-color: #363636;
+  color: #fff;
+  padding: 11px 0 5px 0;
+  border-top: 4px solid #057fcb;
+  margin-bottom: 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
 .sidemenu {
   width: 190px;
   float: left;
@@ -1632,23 +1656,6 @@ th {
 .sidemenu ul a.active:before {
   content: '< / >';
   float: right;
-}
-
-
-
-class {
-  display: block;
-}
-.header {
-  background-color: #363636;
-  color: #fff;
-  padding: 11px 0 5px 0;
-  border-top: 4px solid #057fcb;
-  margin-bottom: 20px;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
 }
 
 .btn {
@@ -2011,10 +2018,12 @@ button:focus {
   padding-right: 15px;
 }
 .content {
-  margin: 0 0 20px 210px;
   background-color: #fff;
   border-radius: $border-radius;
   padding: 10px 10px 10px 20px;
+}
+.content-wrapper {
+  margin: 0 0 20px 210px;
 }
 .content-title {
   background-color: rgba(5,127,203,0.1);

@@ -4,7 +4,11 @@
     angular
         .module('application.package', [
             'lbServices',
-            'directive.styleBlock',
+            'component.colour',
+            'component.fonts',
+            'component.fontsSize',
+            'component.fontsCustom',
+            'component.borders',
             'factory.packageStore'
         ])
         .config(config);
@@ -28,8 +32,7 @@
         var packageCtrl = this;
 
         PackageStore.setElem($stateParams.id);
-
-
+        packageCtrl.package = PackageStore.getElem();
 
         // --- Borders
 

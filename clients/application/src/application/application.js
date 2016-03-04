@@ -7,6 +7,11 @@
             'ui.router',
             'ngResource',
             'application.package',
+            'component.colour',
+            'component.fonts',
+            'component.fontsSize',
+            'component.fontsCustom',
+            'component.borders',
             'directive.grid',
             'directive.navigation',
             'factory.packageStore'

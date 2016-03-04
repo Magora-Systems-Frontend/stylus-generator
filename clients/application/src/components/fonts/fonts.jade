@@ -1,0 +1,18 @@
+div
+    h2 {{fontsCtrl.title}}
+
+    div.colors-wrapp.clearfix
+        div.font-family-card(ng-repeat = "card in fontsCtrl.getCards()")
+            label
+                input(type='text' ng-model='card.value' placeholder='"Arial"').font-inp
+            label
+                input(type='text' ng-model='card.class'  placeholder='add new').var-value
+
+        div.font-family-card
+            label
+                input(type='text' ng-model='fontsCtrl.temp.value' placeholder='"Arial"').font-inp
+            label
+                input(type='text' ng-model='fontsCtrl.temp.class'  placeholder='add new').var-value
+
+        div.font-family-card.font-add-btn
+            a(ng-click="fontsCtrl.addCard()") +
