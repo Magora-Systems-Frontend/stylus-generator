@@ -1,7 +1,7 @@
 div
     topbar
 
-    div(ng-if="packageCtrl.package").main-wr.container.clearfix
+    div(ng-if="newPackageCtrl.package").main-wr.container.clearfix
 
         navigation
 
@@ -10,7 +10,7 @@ div
             // Description of package
             div.content-description
                 h1.content__title
-                    | {{packageCtrl.package.name}}
+                    | {{newPackageCtrl.package.name}}
                     a (edit)
 
 

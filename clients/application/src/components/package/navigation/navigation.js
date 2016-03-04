@@ -3,6 +3,7 @@
 
     angular
         .module('component.navigation', [
+            'factory.packageStore'
         ])
         .component('navigation', {
             templateUrl: 'components/package/navigation/navigation.html',
@@ -12,20 +13,20 @@
             controllerAs: 'navCtrl'
         });
 
-    function NavCtrl() {
+    function NavCtrl(PackageStore) {
         var navCtrl = this;
 
         navCtrl.objectType = ".styl";
 
         // Action for creating file
         navCtrl.actionCreateFile = function(){
-            alert("create");
+            PackageStore.saveToFile();
         };
 
         // Action for saving file
         navCtrl.actionSavePackage = function() {
-            alert("save");
-        }
+            PackageStore.saveToDB();
+        };
 
 
     }

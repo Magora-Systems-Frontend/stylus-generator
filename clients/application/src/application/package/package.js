@@ -34,13 +34,6 @@
 
         PackageStore.setElem($stateParams.id);
         packageCtrl.package = PackageStore.getElem();
-
-        // --- Borders
-
-        packageCtrl.newBorder = {
-            size: "14",
-            class: "border-example"
-        }
     }
 
 

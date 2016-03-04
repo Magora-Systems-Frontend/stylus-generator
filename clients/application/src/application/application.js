@@ -7,6 +7,7 @@
             'ui.router',
             'ngResource',
             'application.package',
+            'application.newPackage',
             'component.colour',
             'component.fonts',
             'component.fontsSize',

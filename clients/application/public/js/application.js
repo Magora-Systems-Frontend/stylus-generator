@@ -1,3 +1,13 @@
+Array.prototype.unique = function() {
+    var a = this.concat();
+    for(var i=0; i<a.length; ++i) {
+        for(var j=i+1; j<a.length; ++j) {
+            if(a[i] === a[j])
+                a.splice(j, 1);
+        }
+    }
+    return a;
+};
 (function (angular) {
     'use strict';
 
@@ -8,6 +18,7 @@
             'ui.router',
             'ngResource',
             'application.package',
+            'application.newPackage',
             'component.colour',
             'component.fonts',
             'component.fontsSize',
@@ -89,13 +100,25 @@
         };
 
 
-        // -- Api
+        // -- API
 
         // Set current package for working
         packageStore.setElem = function(id) {
             Packages.findById({id: id}, function(data){
                 packageStore.elem = data;
             });
+        };
+
+        // Set default package
+        packageStore.setDefault = function() {
+            var tempPackage = {
+                "name": "New package",
+                "colour": {},
+                "fonts": {},
+                "borders": {}
+            };
+
+            packageStore.elem = tempPackage;
         };
 
         // Get part of package for working in directives
@@ -108,13 +131,9 @@
             // create new array, which hold all elements
             // it's array
             var existArray = getPartOfObject(packageStore.elem, type);
-
-
             existArray.push(data);
 
             setPartToObject(existArray, type);
-
-           // add new to file
         };
 
         // Getting all element of package
@@ -129,14 +148,58 @@
 
         // Save current package in file with type
         packageStore.saveToFile = function(type) {
-            console.log("Try to save package to file")
+
+            // make new file for user
+            var textFile = null;
+
+            // function for creating new file
+            var makeTextFile = function (text) {
+                var data = new Blob([text], {type: 'text/plain'});
+
+                // If we are replacing a previously generated file we need to
+                // manually revoke the object URL to avoid memory leaks.
+                if (textFile !== null) {
+                    window.URL.revokeObjectURL(textFile);
+                }
+
+                textFile = window.URL.createObjectURL(data);
+
+                return textFile;
+            };
+
+            var generationData = function(type) {
+
+            };
+
+            var data = packageStore.elem;
+
+            for(var elem in data) {
+                if(data.hasOwnProperty(elem)) {
+
+                }
+            }
+
+            //console.log(makeTextFile(generationData(type)));
+
+        };
+
+        // Save current page to data base
+        packageStore.saveToDB = function() {
+            Packages.update({where: {id: packageStore.elem.id}}, packageStore.elem, function(err, info){
+                if(err) {
+                    console.log(err);
+                }
+            });
         };
 
         return {
             getByType: packageStore.getByType,
             saveByType: packageStore.saveByType,
+            saveToFile: packageStore.saveToFile,
+            saveToDB: packageStore.saveToDB,
             getElems: packageStore.getElems,
             setElem: packageStore.setElem,
+            setDefault: packageStore.setDefault,
             getElem: packageStore.getElem
         }
     }
@@ -2093,6 +2156,50 @@ module
     'use strict';
 
     config.$inject = ["$stateProvider"];
+    NewPackageCtrl.$inject = ["$stateParams", "PackageStore", "$q"];
+    angular
+        .module('application.newPackage', [
+            'factory.packageStore',
+            'component.colour',
+            'component.fonts',
+            'component.fontsSize',
+            'component.fontsCustom',
+            'component.borders',
+            'component.navigation'
+        ])
+        .config(config);
+
+    // Config
+    function config(
+        $stateProvider
+    ) {
+        $stateProvider
+            .state('application.newPackage', {
+                url: 'create',
+                templateUrl: 'application/newPackage/newPackage.html',
+                controller: NewPackageCtrl,
+                controllerAs: "newPackageCtrl"
+            });
+
+    }
+
+    // Controller of page
+    function NewPackageCtrl($stateParams, PackageStore, $q) {
+        var newPackageCtrl = this;
+
+        PackageStore.setDefault();
+        newPackageCtrl.package = PackageStore.getElem();
+
+        alert("work! here you can create new package");
+
+    }
+
+
+})(angular);
+(function (angular) {
+    'use strict';
+
+    config.$inject = ["$stateProvider"];
     PackageCtrl.$inject = ["Packages", "$stateParams", "PackageStore", "$q"];
     angular
         .module('application.package', [
@@ -2127,13 +2234,6 @@ module
 
         PackageStore.setElem($stateParams.id);
         packageCtrl.package = PackageStore.getElem();
-
-        // --- Borders
-
-        packageCtrl.newBorder = {
-            size: "14",
-            class: "border-example"
-        }
     }
 
 
@@ -2391,8 +2491,10 @@ module
 (function (angular) {
     'use strict';
 
+    NavCtrl.$inject = ["PackageStore"];
     angular
         .module('component.navigation', [
+            'factory.packageStore'
         ])
         .component('navigation', {
             templateUrl: 'components/package/navigation/navigation.html',
@@ -2402,34 +2504,23 @@ module
             controllerAs: 'navCtrl'
         });
 
-    function NavCtrl() {
+    function NavCtrl(PackageStore) {
         var navCtrl = this;
 
         navCtrl.objectType = ".styl";
 
         // Action for creating file
         navCtrl.actionCreateFile = function(){
-            alert("create");
+            PackageStore.saveToFile();
         };
 
         // Action for saving file
         navCtrl.actionSavePackage = function() {
-            alert("save");
-        }
+            PackageStore.saveToDB();
+        };
 
 
     }
 
 
 })(angular);
-
-Array.prototype.unique = function() {
-    var a = this.concat();
-    for(var i=0; i<a.length; ++i) {
-        for(var j=i+1; j<a.length; ++j) {
-            if(a[i] === a[j])
-                a.splice(j, 1);
-        }
-    }
-    return a;
-};
