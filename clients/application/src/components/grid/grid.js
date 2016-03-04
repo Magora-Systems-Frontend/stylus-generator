@@ -2,20 +2,16 @@
     'use strict';
 
     angular
-        .module('directive.grid', [
-            'directive.topbar',
+        .module('component.grid', [
+            'component.topbar',
             'factory.packageStore'
         ])
-        .directive('grid', function () {
-            return {
-                templateUrl: 'directive/grid/grid.html',
+        .component('grid', {
+                templateUrl: 'components/grid/grid.html',
                 replace: true,
                 restrict: 'E',
-                scope: true,
-                bindToController: true,
                 controller: GridCtrl,
                 controllerAs: 'gridCtrl'
-            }
         });
 
     function GridCtrl(PackageStore) {

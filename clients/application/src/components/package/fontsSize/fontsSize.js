@@ -6,7 +6,7 @@
             'factory.packageStore'
         ])
         .component('fontsSize', {
-                templateUrl: 'components/fontsSize/fontsSize.html',
+                templateUrl: 'components/package/fontsSize/fontsSize.html',
                 replace: true,
                 restrict: 'E',
                 controller: ColourCtrl,

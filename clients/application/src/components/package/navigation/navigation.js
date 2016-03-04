@@ -2,18 +2,14 @@
     'use strict';
 
     angular
-        .module('directive.navigation', [
+        .module('component.navigation', [
         ])
-        .directive('navigation', function () {
-            return {
-                templateUrl: 'directive/navigation/navigation.html',
-                replace: true,
-                restrict: 'E',
-                scope: true,
-                bindToController: true,
-                controller: NavCtrl,
-                controllerAs: 'navCtrl'
-            }
+        .component('navigation', {
+            templateUrl: 'components/package/navigation/navigation.html',
+            replace: true,
+            restrict: 'E',
+            controller: NavCtrl,
+            controllerAs: 'navCtrl'
         });
 
     function NavCtrl() {

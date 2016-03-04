@@ -4,12 +4,13 @@
     angular
         .module('application.package', [
             'lbServices',
+            'factory.packageStore',
             'component.colour',
             'component.fonts',
             'component.fontsSize',
             'component.fontsCustom',
             'component.borders',
-            'factory.packageStore'
+            'component.navigation'
         ])
         .config(config);
 

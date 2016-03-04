@@ -12,8 +12,8 @@
             'component.fontsSize',
             'component.fontsCustom',
             'component.borders',
-            'directive.grid',
-            'directive.navigation',
+            'component.grid',
+            'component.navigation',
             'factory.packageStore'
         ])
         .config(config);

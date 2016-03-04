@@ -2,18 +2,14 @@
     'use strict';
 
     angular
-        .module('directive.topbar', [
+        .module('component.topbar', [
         ])
-        .directive('topbar', function () {
-            return {
-                templateUrl: 'directive/topbar/topbar.html',
+        .component('topbar', {
+                templateUrl: 'components/basic/topbar/topbar.html',
                 replace: true,
                 restrict: 'E',
-                scope: true,
-                bindToController: true,
                 controller: TopbarCtrl,
                 controllerAs: 'topbarCtrl'
-            }
         });
 
     function TopbarCtrl() {

@@ -6,7 +6,7 @@
             'factory.packageStore'
         ])
         .component('fonts', {
-                templateUrl: 'components/fonts/fonts.html',
+                templateUrl: 'components/package/fonts/fonts.html',
                 replace: true,
                 restrict: 'E',
                 controller: FontsCtrl,

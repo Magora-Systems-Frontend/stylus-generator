@@ -6,7 +6,7 @@
             'factory.packageStore'
         ])
         .component('colour', {
-                templateUrl: 'components/colour/colour.html',
+                templateUrl: 'components/package/colour/colour.html',
                 replace: true,
                 restrict: 'E',
                 controller: ColourCtrl,

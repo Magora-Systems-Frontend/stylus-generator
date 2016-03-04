@@ -6,7 +6,7 @@
             'factory.packageStore'
         ])
         .component('borders', {
-                templateUrl: 'components/borders/borders.html',
+                templateUrl: 'components/package/borders/borders.html',
                 replace: true,
                 restrict: 'E',
                 controller: BordersCtrl,

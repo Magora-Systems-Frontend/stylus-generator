@@ -6,7 +6,7 @@
             'factory.packageStore'
         ])
         .component('fontsCustom', {
-                templateUrl: 'components/fontsCustom/fontsCustom.html',
+                templateUrl: 'components/package/fontsCustom/fontsCustom.html',
                 replace: true,
                 restrict: 'E',
                 controller: FontsCustomCtrl,
