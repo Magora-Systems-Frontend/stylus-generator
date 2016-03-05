@@ -3,6 +3,7 @@
 
     angular
         .module('component.topbar', [
+          'factory.packageStore'
         ])
         .component('topbar', {
                 templateUrl: 'components/basic/topbar/topbar.html',
@@ -12,8 +13,9 @@
                 controllerAs: 'topbarCtrl'
         });
 
-    function TopbarCtrl() {
+    function TopbarCtrl(PackageStore) {
         var topbarCtrl = this;
+
 
     }
 

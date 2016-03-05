@@ -9,5 +9,6 @@ div.sidemenu
         each type in ['.styl', '.less', '.scss']
                 option: = type
 
-    a.btn.btn-success(ng-click="navCtrl.actionSavePackage()") save
-    a.btn.btn-info(ng-click="navCtrl.actionCreateFile()") create {{navCtrl.objectType}} file
+      a.btn.btn-success(ng-click="navCtrl.actionSavePackage()" ng-if="!navCtrl.modeType") save
+      a.btn.btn-success(ng-click="navCtrl.actionCreatePackage()" ng-if="navCtrl.modeType") create
+      a.btn.btn-info(ng-click="navCtrl.actionCreateFile()") create {{navCtrl.objectType}} file

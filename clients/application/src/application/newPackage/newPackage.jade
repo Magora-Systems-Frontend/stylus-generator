@@ -3,16 +3,15 @@ div
 
     div(ng-if="newPackageCtrl.package").main-wr.container.clearfix
 
-        navigation
+        navigation(dir-type="create")
 
         div.content-wrapper
 
             // Description of package
             div.content-description
-                h1.content__title
-                    | {{newPackageCtrl.package.name}}
-                    a (edit)
-
+                label
+                  input(ng-model="newPackageCtrl.package.name"
+                      ng-change="newPackageCtrl.actionTitleChange()").content__title
 
             // Colour
             div.content#colour

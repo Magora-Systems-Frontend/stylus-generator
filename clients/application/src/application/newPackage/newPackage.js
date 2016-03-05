@@ -28,13 +28,17 @@
     }
 
     // Controller of page
-    function NewPackageCtrl($stateParams, PackageStore, $q) {
+    function NewPackageCtrl(PackageStore, $q) {
         var newPackageCtrl = this;
 
+        // Initilize state
         PackageStore.setDefault();
         newPackageCtrl.package = PackageStore.getElem();
 
-        alert("work! here you can create new package");
+        // Action for saving current title of package
+        newPackageCtrl.actionTitleChange = function() {
+          PackageStore.saveByProperty("name", newPackageCtrl.package.name);
+        }
 
     }
 

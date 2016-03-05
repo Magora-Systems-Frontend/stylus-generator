@@ -13,23 +13,27 @@
             controllerAs: 'navCtrl'
         });
 
-    function NavCtrl(PackageStore) {
+    function NavCtrl(PackageStore, $attrs) {
         var navCtrl = this;
 
         navCtrl.objectType = ".styl";
+        navCtrl.modeType = $attrs.dirType;
+
 
         // Action for creating file
         navCtrl.actionCreateFile = function(){
             PackageStore.saveToFile();
         };
 
-        // Action for saving file
+        // Action for creating new package
+        navCtrl.actionCreatePackage = function() {
+          PackageStore.create();
+        };
+
+        // Action for saving package
         navCtrl.actionSavePackage = function() {
             PackageStore.saveToDB();
         };
-
-
     }
-
 
 })(angular);

@@ -78,7 +78,6 @@ Array.prototype.unique = function() {
             }
             return obj;
         };
-
         var setPartToObject = function(data, type) {
             var types = type.split(",");
             var tempObj = {};
@@ -134,6 +133,11 @@ Array.prototype.unique = function() {
             existArray.push(data);
 
             setPartToObject(existArray, type);
+        };
+
+        // Save by property
+        packageStore.saveByProperty = function(property, value) {
+          console.log("Save, now" + property + " = " + value);
         };
 
         // Getting all element of package
@@ -192,11 +196,25 @@ Array.prototype.unique = function() {
             });
         };
 
+        // Create new package in data base
+        packageStore.create = function() {
+            Packages.create(packageStore.elem, function(err, info) {
+              if(err) {
+                console.log(err);
+              }
+              else {
+                console.log(info);
+              }
+            });
+        };
+
         return {
             getByType: packageStore.getByType,
             saveByType: packageStore.saveByType,
+            saveByProperty: packageStore.saveByProperty,
             saveToFile: packageStore.saveToFile,
             saveToDB: packageStore.saveToDB,
+            create: packageStore.create,
             getElems: packageStore.getElems,
             setElem: packageStore.setElem,
             setDefault: packageStore.setDefault,
@@ -2156,7 +2174,7 @@ module
     'use strict';
 
     config.$inject = ["$stateProvider"];
-    NewPackageCtrl.$inject = ["$stateParams", "PackageStore", "$q"];
+    NewPackageCtrl.$inject = ["PackageStore", "$q"];
     angular
         .module('application.newPackage', [
             'factory.packageStore',
@@ -2184,18 +2202,23 @@ module
     }
 
     // Controller of page
-    function NewPackageCtrl($stateParams, PackageStore, $q) {
+    function NewPackageCtrl(PackageStore, $q) {
         var newPackageCtrl = this;
 
+        // Initilize state
         PackageStore.setDefault();
         newPackageCtrl.package = PackageStore.getElem();
 
-        alert("work! here you can create new package");
+        // Action for saving current title of package
+        newPackageCtrl.actionTitleChange = function() {
+          PackageStore.saveByProperty("name", newPackageCtrl.package.name);
+        }
 
     }
 
 
 })(angular);
+
 (function (angular) {
     'use strict';
 
@@ -2274,8 +2297,10 @@ module
 (function (angular) {
     'use strict';
 
+    TopbarCtrl.$inject = ["PackageStore"];
     angular
         .module('component.topbar', [
+          'factory.packageStore'
         ])
         .component('topbar', {
                 templateUrl: 'components/basic/topbar/topbar.html',
@@ -2285,8 +2310,9 @@ module
                 controllerAs: 'topbarCtrl'
         });
 
-    function TopbarCtrl() {
+    function TopbarCtrl(PackageStore) {
         var topbarCtrl = this;
+
 
     }
 
@@ -2491,7 +2517,7 @@ module
 (function (angular) {
     'use strict';
 
-    NavCtrl.$inject = ["PackageStore"];
+    NavCtrl.$inject = ["PackageStore", "$attrs"];
     angular
         .module('component.navigation', [
             'factory.packageStore'
@@ -2504,23 +2530,27 @@ module
             controllerAs: 'navCtrl'
         });
 
-    function NavCtrl(PackageStore) {
+    function NavCtrl(PackageStore, $attrs) {
         var navCtrl = this;
 
         navCtrl.objectType = ".styl";
+        navCtrl.modeType = $attrs.dirType;
+
 
         // Action for creating file
         navCtrl.actionCreateFile = function(){
             PackageStore.saveToFile();
         };
 
-        // Action for saving file
+        // Action for creating new package
+        navCtrl.actionCreatePackage = function() {
+          PackageStore.create();
+        };
+
+        // Action for saving package
         navCtrl.actionSavePackage = function() {
             PackageStore.saveToDB();
         };
-
-
     }
-
 
 })(angular);

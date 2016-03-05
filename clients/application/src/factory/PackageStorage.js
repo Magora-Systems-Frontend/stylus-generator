@@ -23,7 +23,6 @@
             }
             return obj;
         };
-
         var setPartToObject = function(data, type) {
             var types = type.split(",");
             var tempObj = {};
@@ -79,6 +78,11 @@
             existArray.push(data);
 
             setPartToObject(existArray, type);
+        };
+
+        // Save by property
+        packageStore.saveByProperty = function(property, value) {
+          console.log("Save, now" + property + " = " + value);
         };
 
         // Getting all element of package
@@ -137,11 +141,25 @@
             });
         };
 
+        // Create new package in data base
+        packageStore.create = function() {
+            Packages.create(packageStore.elem, function(err, info) {
+              if(err) {
+                console.log(err);
+              }
+              else {
+                console.log(info);
+              }
+            });
+        };
+
         return {
             getByType: packageStore.getByType,
             saveByType: packageStore.saveByType,
+            saveByProperty: packageStore.saveByProperty,
             saveToFile: packageStore.saveToFile,
             saveToDB: packageStore.saveToDB,
+            create: packageStore.create,
             getElems: packageStore.getElems,
             setElem: packageStore.setElem,
             setDefault: packageStore.setDefault,
