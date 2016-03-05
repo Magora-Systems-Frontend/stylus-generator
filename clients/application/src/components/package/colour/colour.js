@@ -28,8 +28,10 @@
         };
 
         colourCtrl.addCard = function() {
-            PackageStore.saveByType($attrs.blockType, angular.copy(colourCtrl.temp));
-            colourCtrl.temp = {};
+            if(colourCtrl.temp.value && colourCtrl.temp.class) {
+                PackageStore.saveByType($attrs.blockType, angular.copy(colourCtrl.temp));
+                colourCtrl.temp = {};
+            }
         };
 
     }

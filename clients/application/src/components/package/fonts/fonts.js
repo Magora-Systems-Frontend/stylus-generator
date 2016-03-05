@@ -28,8 +28,10 @@
         };
 
         fontsCtrl.addCard = function() {
+          if(fontsCtrl.temp.value && fontsCtrl.temp.class) {
             PackageStore.saveByType($attrs.blockType, angular.copy(fontsCtrl.temp));
             fontsCtrl.temp = {};
+          }
         };
 
     }

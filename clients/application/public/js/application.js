@@ -2385,8 +2385,10 @@ module
         };
 
         colourCtrl.addCard = function() {
-            PackageStore.saveByType($attrs.blockType, angular.copy(colourCtrl.temp));
-            colourCtrl.temp = {};
+            if(colourCtrl.temp.value && colourCtrl.temp.class) {
+                PackageStore.saveByType($attrs.blockType, angular.copy(colourCtrl.temp));
+                colourCtrl.temp = {};
+            }
         };
 
     }
@@ -2425,8 +2427,10 @@ module
         };
 
         fontsCtrl.addCard = function() {
+          if(fontsCtrl.temp.value && fontsCtrl.temp.class) {
             PackageStore.saveByType($attrs.blockType, angular.copy(fontsCtrl.temp));
             fontsCtrl.temp = {};
+          }
         };
 
     }
@@ -2465,8 +2469,10 @@ module
         };
 
         fontsCustomCtrl.addCard = function() {
-            PackageStore.saveByType($attrs.blockType, angular.copy(fontsCustomCtrl.temp));
-            fontsCustomCtrl.temp = {};
+            if(fontsCustomCtrl.temp.value && fontsCustomCtrl.temp.class) {
+              PackageStore.saveByType($attrs.blockType, angular.copy(fontsCustomCtrl.temp));
+              fontsCustomCtrl.temp = {};
+            }
         };
 
     }
@@ -2505,8 +2511,10 @@ module
         };
 
         fontsSizeCtrl.addCard = function() {
+          if(fontsSizeCtrl.temp.value && fontsSizeCtrl.temp.class) {
             PackageStore.saveByType($attrs.blockType, angular.copy(fontsSizeCtrl.temp));
             fontsSizeCtrl.temp = {};
+          }
         };
 
     }
