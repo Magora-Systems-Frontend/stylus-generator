@@ -2114,70 +2114,6 @@ header {
   height: 40px;
 }
 
-.table {
-  width: 100%;
-  max-width: 100%;
-  border-radius: $border-radius;
-  border-collapse: collapse;
-  border-spacing: 0;
-  overflow-x: auto;
-  min-height: 0.01%;
-}
-.table tr > th {
-  background-color: #ddd;
-  border-right: 1px solid #fff;
-}
-.table tr > th:last-child {
-  border-right-color: #ddd;
-}
-.table tr > td {
-  background-color: #fff;
-  border: 1px solid #ddd;
-}
-.table tr > td a {
-  color: $text-color;
-}
-.table tr > td a:hover {
-  color: $m-brand-blue;
-}
-.table tr > td span {
-  font-size: 125px;
-  margin: 4px -1px 0 -3px;
-  display: inline-block;
-  height: 32px;
-  line-height: 32px;
-  overflow: hidden;
-  color: #ddd;
-}
-.table td,
-.table th {
-  text-align: left;
-  padding: 10px 10px 7px 10px;
-  line-height: 1.4;
-  vertical-align: middle;
-}
-.search-bar .btn {
-  display: inline-block;
-  border-radius: $border-radius;
-  margin-bottom: 20px;
-  font-size: 18px;
-  padding: 8px 25px;
-}
-.search-bar label {
-  display: inline-block;
-  margin: 0 20px 20px 0;
-  vertical-align: top;
-  width: -webkit-calc(50% - 88px);
-  width: calc(50% - 88px);
-}
-.search-bar input[type='text'] {
-  border-radius: $border-radius;
-  border: 1px solid #ddd;
-  font-size: 18px;
-  height: 40px;
-  padding: 0 25px;
-}
-
 .sidemenu {
   width: 190px;
   float: left;
@@ -2400,4 +2336,68 @@ header {
   background-color: #fff;
   padding: 2px 5px;
   margin-bottom: 15px;
+}
+
+.table {
+  width: 100%;
+  max-width: 100%;
+  border-radius: $border-radius;
+  border-collapse: collapse;
+  border-spacing: 0;
+  overflow-x: auto;
+  min-height: 0.01%;
+}
+.table tr > th {
+  background-color: #ddd;
+  border-right: 1px solid #fff;
+}
+.table tr > th:last-child {
+  border-right-color: #ddd;
+}
+.table tr > td {
+  background-color: #fff;
+  border: 1px solid #ddd;
+}
+.table tr > td a {
+  color: $text-color;
+}
+.table tr > td a:hover {
+  color: $m-brand-blue;
+}
+.table tr > td span {
+  font-size: 125px;
+  margin: 4px -1px 0 -3px;
+  display: inline-block;
+  height: 32px;
+  line-height: 32px;
+  overflow: hidden;
+  color: #ddd;
+}
+.table td,
+.table th {
+  text-align: left;
+  padding: 10px 10px 7px 10px;
+  line-height: 1.4;
+  vertical-align: middle;
+}
+.search-bar .btn {
+  display: inline-block;
+  border-radius: $border-radius;
+  margin-bottom: 20px;
+  font-size: 18px;
+  padding: 8px 25px;
+}
+.search-bar label {
+  display: inline-block;
+  margin: 0 20px 20px 0;
+  vertical-align: top;
+  width: -webkit-calc(50% - 88px);
+  width: calc(50% - 88px);
+}
+.search-bar input[type='text'] {
+  border-radius: $border-radius;
+  border: 1px solid #ddd;
+  font-size: 18px;
+  height: 40px;
+  padding: 0 25px;
 }

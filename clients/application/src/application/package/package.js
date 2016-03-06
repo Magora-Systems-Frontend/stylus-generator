@@ -34,6 +34,7 @@
 
         PackageStore.setElem($stateParams.id);
         packageCtrl.package = PackageStore.getElem();
+
     }
 
 

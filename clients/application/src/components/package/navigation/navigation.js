@@ -3,7 +3,8 @@
 
     angular
         .module('component.navigation', [
-            'factory.packageStore'
+            'factory.packageStore',
+            'directive.scrollTo'
         ])
         .component('navigation', {
             templateUrl: 'components/package/navigation/navigation.html',
@@ -18,11 +19,14 @@
 
         navCtrl.objectType = ".styl";
         navCtrl.modeType = $attrs.dirType;
+        navCtrl.links = ['colour', 'fonts', 'borders'];
 
 
         // Action for creating file
         navCtrl.actionCreateFile = function(){
-            PackageStore.saveToFile();
+            var linkOnFile = PackageStore.saveToFile(navCtrl.objectType);
+
+           window.location.assign(linkOnFile);
         };
 
         // Action for creating new package
@@ -34,6 +38,16 @@
         navCtrl.actionSavePackage = function() {
             PackageStore.saveToDB();
         };
+
+        navCtrl.actionMoveToAnchor = function(e) {
+            // set the location.hash to the id of
+            // the element you wish to scroll to.
+           // $location.hash('bottom');
+            e.preventDefault();
+
+            // call $anchorScroll()
+            //$anchorScroll();
+        }
     }
 
 })(angular);

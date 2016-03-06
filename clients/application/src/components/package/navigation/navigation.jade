@@ -1,14 +1,15 @@
 div.sidemenu
-    nav
-        ul
-            each val in ['colour', 'fonts', 'borders']
-                li: a(href='#' + val)= val
+  nav
+    ul
+      li(ng-repeat="val in navCtrl.links")
+        scroll-to(anchor="{{val}}")
 
 
-    select(ng-model="navCtrl.objectType")
-        each type in ['.styl', '.less', '.scss']
-                option: = type
 
-      a.btn.btn-success(ng-click="navCtrl.actionSavePackage()" ng-if="!navCtrl.modeType") save
-      a.btn.btn-success(ng-click="navCtrl.actionCreatePackage()" ng-if="navCtrl.modeType") create
-      a.btn.btn-info(ng-click="navCtrl.actionCreateFile()") create {{navCtrl.objectType}} file
+  select(ng-model="navCtrl.objectType")
+    each type in ['.styl', '.less', '.scss']
+      option: = type
+
+  a.btn.btn-success(ng-click="navCtrl.actionSavePackage()" ng-if="!navCtrl.modeType") save
+  a.btn.btn-success(ng-click="navCtrl.actionCreatePackage()" ng-if="navCtrl.modeType") create
+  a.btn.btn-info(ng-click="navCtrl.actionCreateFile()") create {{navCtrl.objectType}} file

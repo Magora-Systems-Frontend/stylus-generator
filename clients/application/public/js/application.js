@@ -17,6 +17,7 @@ Array.prototype.unique = function() {
             /* vendors */
             'ui.router',
             'ngResource',
+            'directive.scrollTo',
             'application.package',
             'application.newPackage',
             'component.colour',
@@ -52,6 +53,7 @@ Array.prototype.unique = function() {
 
 
 })(angular);
+
 (function (angular) {
     'use strict';
 
@@ -63,9 +65,9 @@ Array.prototype.unique = function() {
         .factory('PackageStore', PackageStore);
 
     function PackageStore(Packages) {
-
         var packageStore = this;
 
+        // -- Init
         packageStore.elems = Packages.find();
         packageStore.elem = {};
 
@@ -98,7 +100,6 @@ Array.prototype.unique = function() {
             angular.merge(packageStore.elem, newObj);
         };
 
-
         // -- API
 
         // Set current package for working
@@ -112,9 +113,40 @@ Array.prototype.unique = function() {
         packageStore.setDefault = function() {
             var tempPackage = {
                 "name": "New package",
-                "colour": {},
-                "fonts": {},
-                "borders": {}
+                "colour":{
+                  "primary": [
+                    {
+                      "class": "blue",
+                      "value": "#D4E157"
+                    },
+                    {
+                      "class": "green",
+                      "value": "#FFAB40"
+                    },
+                    {
+                      "class": "brown",
+                      "value": "#78909C"
+                    },
+                    {
+                      "class": "blue",
+                      "value": "#D4E157"
+                    }
+                  ],
+                  "secondary": []
+                },
+                "fonts": {
+                  "font-family": [],
+                  "font-size": [],
+                  "font-custom": []
+                },
+                "borders": {
+                  "standart": [
+                    {
+                      "value": 14,
+                      "class": "border"
+                    }
+                  ]
+                }
             };
 
             packageStore.elem = tempPackage;
@@ -137,7 +169,7 @@ Array.prototype.unique = function() {
 
         // Save by property
         packageStore.saveByProperty = function(property, value) {
-          console.log("Save, now" + property + " = " + value);
+          //console.log("Save, now" + property + " = " + value);
         };
 
         // Getting all element of package
@@ -154,8 +186,43 @@ Array.prototype.unique = function() {
         packageStore.saveToFile = function(type) {
 
             // make new file for user
-            var textFile = null;
+            var textFile = null,
+                linkOnFile;
 
+           // function of transforming data from object to text
+            var generationData = function(type, data) {
+              var tempData = "",
+                  typeSign;
+
+              switch (type) {
+                case ".scss":
+                      typeSign = "$";
+                      break;
+                case ".less":
+                      typeSign = "@";
+                      break;
+                case ".styl":
+                      typeSign = "";
+                      break;
+              }
+
+              recordToString(data.colour["primary"]);
+              recordToString(data.colour["secondary"]);
+              recordToString(data.fonts["font-family"]);
+              recordToString(data.fonts["font-size"]);
+              recordToString(data.fonts["font-custom"]);
+              recordToString(data.borders["standart"]);
+
+              function recordToString(data) {
+                if(data) {
+                  data.forEach(function (item) {
+                    tempData += typeSign + item.class + ": " + item.value + ";\n";
+                  });
+                }
+              }
+
+              return tempData;
+          };
             // function for creating new file
             var makeTextFile = function (text) {
                 var data = new Blob([text], {type: 'text/plain'});
@@ -171,20 +238,9 @@ Array.prototype.unique = function() {
                 return textFile;
             };
 
-            var generationData = function(type) {
+            linkOnFile = makeTextFile(generationData(type, packageStore.elem));
 
-            };
-
-            var data = packageStore.elem;
-
-            for(var elem in data) {
-                if(data.hasOwnProperty(elem)) {
-
-                }
-            }
-
-            //console.log(makeTextFile(generationData(type)));
-
+            return linkOnFile;
         };
 
         // Save current page to data base
@@ -223,6 +279,15 @@ Array.prototype.unique = function() {
     }
 
 })(angular);
+
+//angular.module('application', [])
+//  .filter('filtersProject', ['projects', function(projects) {
+//
+//      return function(projects) {
+//        console.log(projects);
+//        return projects;
+//      };
+//}]);
 
 (function(window, angular, undefined) {'use strict';
 
@@ -2257,10 +2322,12 @@ module
 
         PackageStore.setElem($stateParams.id);
         packageCtrl.package = PackageStore.getElem();
+
     }
 
 
 })(angular);
+
 (function (angular) {
     'use strict';
 
@@ -2271,11 +2338,11 @@ module
             'factory.packageStore'
         ])
         .component('grid', {
-                templateUrl: 'components/grid/grid.html',
-                replace: true,
-                restrict: 'E',
-                controller: GridCtrl,
-                controllerAs: 'gridCtrl'
+            templateUrl: 'components/grid/grid.html',
+            replace: true,
+            restrict: 'E',
+            controller: GridCtrl,
+            controllerAs: 'gridCtrl'
         });
 
     function GridCtrl(PackageStore) {
@@ -2290,6 +2357,45 @@ module
         gridCtrl.filter = "";
 
     }
+
+
+})(angular);
+
+(function (angular) {
+  'use strict';
+
+  ScrollToCtrl.$inject = ["$scope", "$attrs"];
+  angular
+    .module('directive.scrollTo', [
+    ])
+    .directive('scrollTo', function () {
+      return {
+        templateUrl: 'directives/scrollTo/scrollTo.html',
+        replace: true,
+        restrict: 'E',
+        scope: true,
+        bindToController: true,
+        controller: ScrollToCtrl,
+        controllerAs: 'scrollToCtrl'
+      }
+    });
+
+  function ScrollToCtrl($scope,$attrs ) {
+    var scrollToCtrl = this;
+
+
+    scrollToCtrl.link = "#" + $attrs.anchor;
+
+    scrollToCtrl.action = function() {
+        var $target;
+
+        if (scrollToCtrl.link) {
+          $target = $(scrollToCtrl.link);
+        }
+
+        element("body").animate({scrollTop: $target.offset().top}, "slow");
+    };
+  }
 
 
 })(angular);
@@ -2528,7 +2634,8 @@ module
     NavCtrl.$inject = ["PackageStore", "$attrs"];
     angular
         .module('component.navigation', [
-            'factory.packageStore'
+            'factory.packageStore',
+            'directive.scrollTo'
         ])
         .component('navigation', {
             templateUrl: 'components/package/navigation/navigation.html',
@@ -2543,11 +2650,14 @@ module
 
         navCtrl.objectType = ".styl";
         navCtrl.modeType = $attrs.dirType;
+        navCtrl.links = ['colour', 'fonts', 'borders'];
 
 
         // Action for creating file
         navCtrl.actionCreateFile = function(){
-            PackageStore.saveToFile();
+            var linkOnFile = PackageStore.saveToFile(navCtrl.objectType);
+
+           window.location.assign(linkOnFile);
         };
 
         // Action for creating new package
@@ -2559,6 +2669,16 @@ module
         navCtrl.actionSavePackage = function() {
             PackageStore.saveToDB();
         };
+
+        navCtrl.actionMoveToAnchor = function(e) {
+            // set the location.hash to the id of
+            // the element you wish to scroll to.
+           // $location.hash('bottom');
+            e.preventDefault();
+
+            // call $anchorScroll()
+            //$anchorScroll();
+        }
     }
 
 })(angular);

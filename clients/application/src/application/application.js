@@ -6,6 +6,7 @@
             /* vendors */
             'ui.router',
             'ngResource',
+            'directive.scrollTo',
             'application.package',
             'application.newPackage',
             'component.colour',

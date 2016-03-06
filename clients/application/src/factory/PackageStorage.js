@@ -8,9 +8,9 @@
         .factory('PackageStore', PackageStore);
 
     function PackageStore(Packages) {
-
         var packageStore = this;
 
+        // -- Init
         packageStore.elems = Packages.find();
         packageStore.elem = {};
 
@@ -43,7 +43,6 @@
             angular.merge(packageStore.elem, newObj);
         };
 
-
         // -- API
 
         // Set current package for working
@@ -57,9 +56,40 @@
         packageStore.setDefault = function() {
             var tempPackage = {
                 "name": "New package",
-                "colour": {},
-                "fonts": {},
-                "borders": {}
+                "colour":{
+                  "primary": [
+                    {
+                      "class": "blue",
+                      "value": "#D4E157"
+                    },
+                    {
+                      "class": "green",
+                      "value": "#FFAB40"
+                    },
+                    {
+                      "class": "brown",
+                      "value": "#78909C"
+                    },
+                    {
+                      "class": "blue",
+                      "value": "#D4E157"
+                    }
+                  ],
+                  "secondary": []
+                },
+                "fonts": {
+                  "font-family": [],
+                  "font-size": [],
+                  "font-custom": []
+                },
+                "borders": {
+                  "standart": [
+                    {
+                      "value": 14,
+                      "class": "border"
+                    }
+                  ]
+                }
             };
 
             packageStore.elem = tempPackage;
@@ -82,7 +112,7 @@
 
         // Save by property
         packageStore.saveByProperty = function(property, value) {
-          console.log("Save, now" + property + " = " + value);
+          //console.log("Save, now" + property + " = " + value);
         };
 
         // Getting all element of package
@@ -99,8 +129,43 @@
         packageStore.saveToFile = function(type) {
 
             // make new file for user
-            var textFile = null;
+            var textFile = null,
+                linkOnFile;
 
+           // function of transforming data from object to text
+            var generationData = function(type, data) {
+              var tempData = "",
+                  typeSign;
+
+              switch (type) {
+                case ".scss":
+                      typeSign = "$";
+                      break;
+                case ".less":
+                      typeSign = "@";
+                      break;
+                case ".styl":
+                      typeSign = "";
+                      break;
+              }
+
+              recordToString(data.colour["primary"]);
+              recordToString(data.colour["secondary"]);
+              recordToString(data.fonts["font-family"]);
+              recordToString(data.fonts["font-size"]);
+              recordToString(data.fonts["font-custom"]);
+              recordToString(data.borders["standart"]);
+
+              function recordToString(data) {
+                if(data) {
+                  data.forEach(function (item) {
+                    tempData += typeSign + item.class + ": " + item.value + ";\n";
+                  });
+                }
+              }
+
+              return tempData;
+          };
             // function for creating new file
             var makeTextFile = function (text) {
                 var data = new Blob([text], {type: 'text/plain'});
@@ -116,20 +181,9 @@
                 return textFile;
             };
 
-            var generationData = function(type) {
+            linkOnFile = makeTextFile(generationData(type, packageStore.elem));
 
-            };
-
-            var data = packageStore.elem;
-
-            for(var elem in data) {
-                if(data.hasOwnProperty(elem)) {
-
-                }
-            }
-
-            //console.log(makeTextFile(generationData(type)));
-
+            return linkOnFile;
         };
 
         // Save current page to data base

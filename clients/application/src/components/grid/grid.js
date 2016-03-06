@@ -7,11 +7,11 @@
             'factory.packageStore'
         ])
         .component('grid', {
-                templateUrl: 'components/grid/grid.html',
-                replace: true,
-                restrict: 'E',
-                controller: GridCtrl,
-                controllerAs: 'gridCtrl'
+            templateUrl: 'components/grid/grid.html',
+            replace: true,
+            restrict: 'E',
+            controller: GridCtrl,
+            controllerAs: 'gridCtrl'
         });
 
     function GridCtrl(PackageStore) {
