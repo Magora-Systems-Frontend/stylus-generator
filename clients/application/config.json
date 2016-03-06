@@ -29,7 +29,9 @@
       "bower_components/angular-translate-loader-url/angular-translate-loader-url.min.js",
       "bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.min.js",
 
-      "bower_components/angular-loading-bar/build/loading-bar.min.js"
+      "bower_components/angular-loading-bar/build/loading-bar.min.js",
+
+      "bower_components/jquery/dist/jquery.min.js"
     ],
     "dst": "js/vendor.js"
   },

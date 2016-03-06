@@ -20,16 +20,15 @@
     var scrollToCtrl = this;
 
 
-    scrollToCtrl.link = "#" + $attrs.anchor;
-
     scrollToCtrl.action = function() {
         var $target;
 
-        if (scrollToCtrl.link) {
-          $target = $(scrollToCtrl.link);
+        if ($attrs.anchor) {
+          $target = $attrs.anchor;
         }
 
-        element("body").animate({scrollTop: $target.offset().top}, "slow");
+
+        $("body").animate({scrollTop: $($target).offset().top - 100}, "slow");
     };
   }
 
