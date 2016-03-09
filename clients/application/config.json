@@ -9,8 +9,6 @@
   },
   "vendorcss": {
     "src": [
-      "bower_components/bootstrap/dist/css/bootstrap.min.css",
-      "bower_components/font-awesome/css/font-awesome.min.css",
       "bower_components/angular-loading-bar/build/loading-bar.min.css"
     ],
     "dst": "css/vendor.css"
@@ -60,14 +58,6 @@
     ],
     "dst": "index.html"
   },
-  "fonts": {
-    "src": [
-      "./bower_components/font-awesome/fonts/*.*",
-      "./bower_components/bootstrap/fonts/*.*",
-      "./application/src/fonts/*.*"
-    ],
-    "dst": "/fonts"
-  },
   "img": {
     "src": [
       "./application/src/images/*.*"
@@ -91,7 +81,6 @@
     "templates",
     "layout",
     "img",
-    "fonts",
     "vendorjs",
     "vendorcss",
     "translate"
