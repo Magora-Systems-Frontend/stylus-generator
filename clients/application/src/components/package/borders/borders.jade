@@ -1,0 +1,17 @@
+div
+    h2 {{bordersCtrl.title}}
+
+    div.radius-wrapp.clearfix(ng-repeat = "card in bordersCtrl.getCards()")
+        div.font-size-card.multiple
+            label
+                input(type='text' ng-model='card.value' placeholder='14').font-inp
+                | px
+            label
+                input(type='text' ng-model='card.class' vplaceholder='main-border-radius').var-value
+
+        div.font-size-card.example-card
+            label
+                input(type='text' value='Input example' style='border-radius: {{card.value}}px')
+
+        div.font-size-card.example-card
+            button.btn.btn-success(type='button' style='border-radius: {{card.value}}px') Button example

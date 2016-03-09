@@ -1,0 +1,20 @@
+div
+    h2 {{fontsSizeCtrl.title}}
+
+    div.colors-wrapp.clearfix
+        div.font-size-card(ng-repeat = "card in fontsSizeCtrl.getCards()")
+            label
+                input(type='text' ng-model='card.value' placeholder='15').font-inp
+                | px
+            label
+                input(type='text' ng-model='card.class'  placeholder='font-size-h*').var-value
+
+        div.font-size-card
+            label
+                input(type='text' ng-model='fontsSizeCtrl.temp.value' placeholder='15').font-inp
+                | px
+            label
+                input(type='text' ng-model='fontsSizeCtrl.temp.class'   placeholder='font-size-h*').var-value
+
+        div.font-family-card.font-add-btn
+            a(ng-click="fontsSizeCtrl.addCard()") +

@@ -4,13 +4,19 @@
     angular
         .module('application', [
             /* vendors */
-            'angular-loading-bar',
             'ui.router',
-            'ui.bootstrap',
             'ngResource',
+            'directive.scrollTo',
             'application.package',
-            'directive.grid',
-            'directive.navigation'
+            'application.newPackage',
+            'component.colour',
+            'component.fonts',
+            'component.fontsSize',
+            'component.fontsCustom',
+            'component.borders',
+            'component.grid',
+            'component.navigation',
+            'factory.packageStore'
         ])
         .config(config);
 

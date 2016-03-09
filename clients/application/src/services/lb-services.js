@@ -175,7 +175,7 @@ module.factory(
          *
          *  - `id` – `{*}` - User id
          *
-         *  - `filter` – `{object=}` -
+         *  - `filter` – `{object=}` - 
          *
          * @param {function(Array.<Object>,Object)=} successCb
          *   Success callback with two arguments: `value`, `responseHeaders`.
@@ -292,7 +292,7 @@ module.factory(
          *
          * Data properties:
          *
-         *  - `count` – `{number=}` -
+         *  - `count` – `{number=}` - 
          */
         "prototype$__count__accessTokens": {
           url: urlBase + "/Users/:id/accessTokens/count",
@@ -439,7 +439,7 @@ module.factory(
          *
          * Data properties:
          *
-         *  - `exists` – `{boolean=}` -
+         *  - `exists` – `{boolean=}` - 
          */
         "exists": {
           url: urlBase + "/Users/:id/exists",
@@ -640,7 +640,7 @@ module.factory(
          *
          * Data properties:
          *
-         *  - `count` – `{number=}` -
+         *  - `count` – `{number=}` - 
          */
         "count": {
           url: urlBase + "/Users/count",
@@ -700,7 +700,7 @@ module.factory(
          *
          * @param {Object} postData Request data.
          *
-         *  - `options` – `{object=}` -
+         *  - `options` – `{object=}` - 
          *
          * @param {function(Object,Object)=} successCb
          *   Success callback with two arguments: `value`, `responseHeaders`.
@@ -714,7 +714,7 @@ module.factory(
          *
          * Data properties:
          *
-         *  - `changes` – `{ReadableStream=}` -
+         *  - `changes` – `{ReadableStream=}` - 
          */
         "createChangeStream": {
           url: urlBase + "/Users/change-stream",
@@ -755,9 +755,9 @@ module.factory(
          *
          * The response body contains properties of the AccessToken created on login.
          * Depending on the value of `include` parameter, the body may contain additional properties:
-         *
+         * 
          *   - `user` - `{User}` - Data of the currently logged in user. (`include=user`)
-         *
+         * 
          *
          */
         "login": {
@@ -830,11 +830,11 @@ module.factory(
          *
          * @param {Object=} parameters Request parameters.
          *
-         *  - `uid` – `{string}` -
+         *  - `uid` – `{string}` - 
          *
-         *  - `token` – `{string}` -
+         *  - `token` – `{string}` - 
          *
-         *  - `redirect` – `{string=}` -
+         *  - `redirect` – `{string=}` - 
          *
          * @param {function(Object,Object)=} successCb
          *   Success callback with two arguments: `value`, `responseHeaders`.
@@ -1278,7 +1278,7 @@ module.factory(
          *
          * Data properties:
          *
-         *  - `exists` – `{boolean=}` -
+         *  - `exists` – `{boolean=}` - 
          */
         "exists": {
           url: urlBase + "/Packages/:id/exists",
@@ -1479,7 +1479,7 @@ module.factory(
          *
          * Data properties:
          *
-         *  - `count` – `{number=}` -
+         *  - `count` – `{number=}` - 
          */
         "count": {
           url: urlBase + "/Packages/count",
@@ -1539,7 +1539,7 @@ module.factory(
          *
          * @param {Object} postData Request data.
          *
-         *  - `options` – `{object=}` -
+         *  - `options` – `{object=}` - 
          *
          * @param {function(Object,Object)=} successCb
          *   Success callback with two arguments: `value`, `responseHeaders`.
@@ -1553,7 +1553,7 @@ module.factory(
          *
          * Data properties:
          *
-         *  - `changes` – `{ReadableStream=}` -
+         *  - `changes` – `{ReadableStream=}` - 
          */
         "createChangeStream": {
           url: urlBase + "/Packages/change-stream",
@@ -1573,9 +1573,9 @@ module.factory(
          *
          * @param {Object=} parameters Request parameters.
          *
-         *  - `type` – `{string=}` -
+         *  - `type` – `{string=}` - 
          *
-         *  - `packageId` – `{string=}` -
+         *  - `packageId` – `{string=}` - 
          *
          * @param {function(Object,Object)=} successCb
          *   Success callback with two arguments: `value`, `responseHeaders`.
@@ -1589,10 +1589,44 @@ module.factory(
          *
          * Data properties:
          *
-         *  - `file` – `{file=}` -
+         *  - `file` – `{file=}` - 
          */
         "saveToFile": {
           url: urlBase + "/Packages/tofile",
+          method: "GET"
+        },
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Packages#getById
+         * @methodOf lbServices.Packages
+         *
+         * @description
+         *
+         * <em>
+         * (The remote method definition does not provide any description.)
+         * </em>
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{string=}` - 
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * Data properties:
+         *
+         *  - `package` – `{object=}` - 
+         */
+        "getById": {
+          url: urlBase + "/Packages/getById",
           method: "GET"
         },
       }

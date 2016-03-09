@@ -1,0 +1,51 @@
+.sidemenu
+  width 190px
+  float left
+  position fixed
+  top 103px
+
+  select
+    display block
+    width 100%
+    margin-bottom 20px
+    padding 0 17px
+    border-radius $border-radius
+    border-color $body-color
+    height 40px
+    background-color #fff
+    &:focus
+      outline none !important
+
+  .btn
+    display block
+    margin-bottom 10px
+    border-radius $border-radius
+
+  ul
+    background-color #fff
+    padding-left 0
+    list-style none
+    margin 0 0 20px 0
+    overflow hidden
+    border-radius $border-radius
+
+    li
+      &:last-child a
+        border-bottom none
+
+    a
+      padding 12px 25px
+      display block
+      border-bottom 1px solid $body-color
+      color: $text-color
+      &:hover
+        background-color rgba(5, 127, 203, 0.1)
+        &:before
+          content '< />'
+          float right
+      &.active
+        color: #fff
+        background-color $m-brand-blue-light
+        &:before
+          content '< />'
+          float right

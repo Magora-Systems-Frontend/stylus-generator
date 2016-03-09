@@ -1,0 +1,40 @@
+div
+    topbar
+
+    div(ng-if="newPackageCtrl.package").main-wr.container.clearfix
+
+        navigation(dir-type="create")
+
+        div.content-wrapper
+
+            // Description of package
+            div.content-description
+                label
+                  input(ng-model="newPackageCtrl.package.name"
+                      ng-change="newPackageCtrl.actionTitleChange()").content__title
+
+            // Colour
+            div.content#colour
+                h1.content-title Colour Palette
+
+                colour(block-title = "Primary Palette" block-type="colour, primary")
+                colour(block-title = "Secondary Palette" block-type="colour, secondary")
+
+
+            // Fonts
+            div.content#fonts
+                h1.content-title Fonts
+
+                fonts(block-title = "Font family" block-type="fonts, font-family")
+                fonts-size(block-title = "Font size" block-type="fonts, font-size")
+                fonts-custom(block-title = "" block-type="fonts, font-custom")
+
+
+            // Borders
+            div.content#borders
+                h1.content-title Border Radius
+                borders(block-title = "Border radius" block-type="borders, standart")
+
+
+
+

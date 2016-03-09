@@ -1,41 +1,41 @@
 div
-  topbar
+    topbar
 
-  div.main-wr.container.clearfix
-    navigation
+    div(ng-if="packageCtrl.package").main-wr.container.clearfix
 
-    div.content
-      h1 Colour Palette
+        navigation
 
-      div
-        h2 Primary Palette
+        div.content-wrapper
 
-        div.colors-wrapp.clearfix
-          div(ng-repeat = "color in packageCtrl.getColourPrimary()").color-card
-            label(style='background-color: {{color.value}}').color-inp-lbl
-              input(type='text' ng-model='color.value' placeholder='add new').color-inp
-            label
-              input(type='text' ng-model='color.class' placeholder='add new').color-var
+            // Description of package
+            div.content-description
+                h1.content__title
+                    | {{packageCtrl.package.name}}
+                    a (edit)
 
-          div.color-card
-            label.color-inp-lbl
-              input(type='text' ng-model='packageCtrl.packageNew.value' placeholder='#000000').color-inp
-            label
-              input(type='text' ng-model='packageCtrl.packageNew.class' placeholder='add new').color-var
 
-          div.color-card
-            a(ng-click="packageCtrl.addColourPrimary()").color-inp-btn +
+            // Colour
+            div.content#colour
+                h1.content-title Colour Palette
 
-      div
-        h2 Secondary Palette
-        div.colors-wrapp.clearfix
-          div(ng-repeat = "color in packageCtrl.getColourSecondary()").color-card
-            label(style='background-color: {{color.value}}').color-inp-lbl
-              input(type='text' ng-model='color.value' placeholder='add new').color-inp
-            label
-              input(type='text' ng-model='color.class' placeholder='add new').color-var
+                colour(block-title = "Primary Palette" block-type="colour, primary")
+                colour(block-title = "Secondary Palette" block-type="colour, secondary")
 
-          div.color-card
-            a(href="javascript:void(0);").color-inp-btn +
+
+            // Fonts
+            div.content#fonts
+                h1.content-title Fonts
+
+                fonts(block-title = "Font family" block-type="fonts, font-family")
+                fonts-size(block-title = "Font size" block-type="fonts, font-size")
+                fonts-custom(block-title = "" block-type="fonts, font-custom")
+
+
+            // Borders
+            div.content#borders
+                h1.content-title Border Radius
+                borders(block-title = "Border radius" block-type="borders, standart")
+
+
 
 

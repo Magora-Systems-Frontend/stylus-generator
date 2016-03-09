@@ -1,0 +1,18 @@
+div.main-wr.container
+  div.search-bar
+    label
+      input(type='text' placeholder='Find Project by Name' ng-model="gridCtrl.filter" ng-change="gridCtrl.actionFilter()")
+    a(href='javascript:void(0);').btn.btn-info &#128270;
+
+  table.table
+    thead
+      tr
+        th Project Name
+        th Colour Palette Preview
+
+    tbody
+        tr(ng-repeat="package in gridCtrl.packages")
+          td: a(href='/package/{{package.id}}')
+            | {{package.name}}
+          td
+            span(ng-repeat="color in package.colour.primary" style="color: {{color.value}}") &bull;

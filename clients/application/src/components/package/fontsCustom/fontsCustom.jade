@@ -1,0 +1,27 @@
+div
+    h2 {{fontsCustomCtrl.title}}
+
+    div.colors-wrapp.clearfix
+        div.fonts-wrapp.clearfix(ng-repeat = "card in fontsCustomCtrl.getCards()")
+            div.font-family-card
+                label
+                    input(type='text' ng-model="card.value" placeholder='#dddddd').font-inp
+                label
+                    input(type='text' ng-model="card.class" placeholder='add-new-text-color').var-value
+
+            div(style='color: {{card.value}}') London is the capital of the United Kingdom of Great Britain and Northern Ireland. It is the largest city in Europe and one of the largest cities in the world with the population of 11 million people. About a fifth of the total population of the UK lives in the Greater London area, that is London and its suburbs.
+
+        p Create your style of text
+        div.fonts-wrapp.clearfix
+            div.font-family-card
+                label
+                    input(type='text' ng-model="fontsCustomCtrl.temp.value" placeholder='#dddddd').font-inp
+                label
+                    input(type='text' ng-model="fontsCustomCtrl.temp.class" placeholder='add-new-text-color').var-value
+
+            div(style='color: {{fontsCustomCtrl.temp.value}}') London is the capital of the United Kingdom of Great Britain and Northern Ireland. It is the largest city in Europe and one of the largest cities in the world with the population of 11 million people. About a fifth of the total population of the UK lives in the Greater London area, that is London and its suburbs.
+
+
+        div.clearfix
+            div.font-family-card.font-add-btn.full-width
+                a(ng-click="fontsCustomCtrl.addCard()") +
