@@ -60,9 +60,9 @@
   },
   "img": {
     "src": [
-      "./application/src/images/*.*"
+      "./application/src/image/*.*"
     ],
-    "dst": "/assets/images"
+    "dst": "/image"
   },
   "translate": {
     "lang": {
