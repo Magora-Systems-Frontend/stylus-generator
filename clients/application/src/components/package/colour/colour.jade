@@ -2,7 +2,7 @@ div
     h2 {{colourCtrl.title}}
 
     div.colors-wrapp.clearfix
-        div.color-card(ng-repeat = "card in colourCtrl.getCards()")
+        div.color-card(ng-repeat = "card in colourCtrl.getCards()" ng-click="colourCtrl.deleteCard($index)")
             label(style='background-color: {{card.value}}').color-inp-lbl
                 input(type='text' ng-model='card.value' placeholder='add new').color-inp
             label

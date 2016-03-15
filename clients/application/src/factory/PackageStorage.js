@@ -187,23 +187,39 @@
         };
 
         // Save current page to data base
-        packageStore.saveToDB = function() {
+        packageStore.saveToDB = function(callback) {
             Packages.update({where: {id: packageStore.elem.id}}, packageStore.elem, function(err, info){
                 if(err) {
+                    callback({status: 'Error', msg: "Package wasn't saved"});
                     console.log(err);
+                }
+                else {
+                    callback({status: 'Success', msg: 'Package was saved'});
                 }
             });
         };
 
         // Create new package in data base
-        packageStore.create = function() {
+        packageStore.create = function(callback) {
             Packages.create(packageStore.elem, function(err, info) {
               if(err) {
-                console.log(err);
+                callback({status: 'Error', msg: err});
               }
               else {
-                console.log(info);
+                callback({status: 'Success', msg: "Package was created"});
               }
+            });
+        };
+
+        // Delete package
+        packageStore.delete = function(callback) {
+            Packages.deleteById({id: packageStore.elem.id}, function(err, info){
+               if(err) {
+                   callback({status:'Error', msg: err});
+               }
+               else {
+                   callback({status: 'Success', msg: "Package was deleted"});
+               }
             });
         };
 
@@ -214,6 +230,7 @@
             saveToFile: packageStore.saveToFile,
             saveToDB: packageStore.saveToDB,
             create: packageStore.create,
+            delete: packageStore.delete,
             getElems: packageStore.getElems,
             setElem: packageStore.setElem,
             setDefault: packageStore.setDefault,

@@ -3,27 +3,23 @@
 
     angular
         .module('application', [
+
             /* vendors */
+            'angular-loading-bar',
+            'pascalprecht.translate',
             'ui.router',
+            'ui.bootstrap',
             'ngResource',
-            'directive.scrollTo',
+            'application.packages',
             'application.package',
-            'application.newPackage',
-            'component.colour',
-            'component.fonts',
-            'component.fontsSize',
-            'component.fontsCustom',
-            'component.borders',
-            'component.grid',
-            'component.navigation',
-            'component.notify',
-            'factory.packageStore'
+            'directive.grid'
         ])
         .config(config);
 
     function config(
         $stateProvider,
-        $locationProvider
+        $locationProvider,
+        $translateProvider
     ) {
         $locationProvider.html5Mode(true);
 
@@ -34,6 +30,14 @@
                 controller: AppCtrl,
                 controllerAs: "appCtrl"
             });
+
+        $translateProvider.useStaticFilesLoader({
+            prefix: '/translates/',
+            suffix: '.json'
+        });
+
+        $translateProvider.useSanitizeValueStrategy(null);
+        $translateProvider.preferredLanguage('ru-RU');
 
     }
 

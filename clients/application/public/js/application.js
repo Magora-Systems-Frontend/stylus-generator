@@ -27,6 +27,7 @@ Array.prototype.unique = function() {
             'component.borders',
             'component.grid',
             'component.navigation',
+            'component.notify',
             'factory.packageStore'
         ])
         .config(config);
@@ -51,6 +52,39 @@ Array.prototype.unique = function() {
         var appCtrl = this;
     }
 
+
+})(angular);
+
+(function (angular) {
+    'use strict';
+
+    angular
+        .module('factory.notifyStore', [
+        ])
+        .factory('NotifyStore', NotifyStore);
+
+    function NotifyStore() {
+        var notifyStore = this;
+
+        notifyStore.events = [];
+
+        // Method for adding new notification
+        notifyStore.push = function(object) {
+            notifyStore.events.push(object);
+        };
+
+        // Method for getting notification from here
+        notifyStore.get = function() {
+            var tempEvents = notifyStore.events;
+
+            return tempEvents;
+        };
+
+        return {
+            push: notifyStore.push,
+            getEvents: notifyStore.get
+        }
+    }
 
 })(angular);
 
@@ -244,23 +278,39 @@ Array.prototype.unique = function() {
         };
 
         // Save current page to data base
-        packageStore.saveToDB = function() {
+        packageStore.saveToDB = function(callback) {
             Packages.update({where: {id: packageStore.elem.id}}, packageStore.elem, function(err, info){
                 if(err) {
+                    callback({status: 'Error', msg: "Package wasn't saved"});
                     console.log(err);
+                }
+                else {
+                    callback({status: 'Success', msg: 'Package was saved'});
                 }
             });
         };
 
         // Create new package in data base
-        packageStore.create = function() {
+        packageStore.create = function(callback) {
             Packages.create(packageStore.elem, function(err, info) {
               if(err) {
-                console.log(err);
+                callback({status: 'Error', msg: err});
               }
               else {
-                console.log(info);
+                callback({status: 'Success', msg: "Package was created"});
               }
+            });
+        };
+
+        // Delete package
+        packageStore.delete = function(callback) {
+            Packages.deleteById({id: packageStore.elem.id}, function(err, info){
+               if(err) {
+                   callback({status:'Error', msg: err});
+               }
+               else {
+                   callback({status: 'Success', msg: "Package was deleted"});
+               }
             });
         };
 
@@ -271,6 +321,7 @@ Array.prototype.unique = function() {
             saveToFile: packageStore.saveToFile,
             saveToDB: packageStore.saveToDB,
             create: packageStore.create,
+            delete: packageStore.delete,
             getElems: packageStore.getElems,
             setElem: packageStore.setElem,
             setDefault: packageStore.setDefault,
@@ -2402,6 +2453,36 @@ module
 (function (angular) {
     'use strict';
 
+    NotifyCtrl.$inject = ["NotifyStore"];
+    angular
+        .module('component.notify', [
+          'factory.notifyStore'
+        ])
+        .component('notify', {
+                templateUrl: 'components/basic/notify/notify.html',
+                replace: true,
+                restrict: 'E',
+                controller: NotifyCtrl,
+                controllerAs: 'notifyCtrl'
+        });
+
+    function NotifyCtrl(NotifyStore) {
+        var notifyCtrl = this;
+
+        notifyCtrl.getEvents = function() {
+            var temp = NotifyStore.getEvents();
+            return temp;
+        }
+
+
+    }
+
+
+})(angular);
+
+(function (angular) {
+    'use strict';
+
     TopbarCtrl.$inject = ["PackageStore"];
     angular
         .module('component.topbar', [
@@ -2485,15 +2566,25 @@ module
           class: ""
         };
 
+        //
         colourCtrl.getCards = function() {
+            var temp = PackageStore.getByType($attrs.blockType);
+
             return PackageStore.getByType($attrs.blockType);
         };
 
+        // Method for adding color to package
         colourCtrl.addCard = function() {
             if(colourCtrl.temp.value && colourCtrl.temp.class) {
                 PackageStore.saveByType($attrs.blockType, angular.copy(colourCtrl.temp));
                 colourCtrl.temp = {};
             }
+        };
+
+        // Method for deleting color card from package
+        colourCtrl.deleteCard = function(index) {
+            var temp = PackageStore.getByType($attrs.blockType);
+            temp.splice(index, 1);
         };
 
     }
@@ -2630,10 +2721,11 @@ module
 (function (angular) {
     'use strict';
 
-    NavCtrl.$inject = ["PackageStore", "$attrs"];
+    NavCtrl.$inject = ["PackageStore", "NotifyStore", "$attrs"];
     angular
         .module('component.navigation', [
             'factory.packageStore',
+            'factory.notifyStore',
             'directive.scrollTo'
         ])
         .component('navigation', {
@@ -2644,7 +2736,7 @@ module
             controllerAs: 'navCtrl'
         });
 
-    function NavCtrl(PackageStore, $attrs) {
+    function NavCtrl(PackageStore, NotifyStore, $attrs) {
         var navCtrl = this;
 
         navCtrl.objectType = ".styl";
@@ -2656,28 +2748,25 @@ module
         navCtrl.actionCreateFile = function(){
             var linkOnFile = PackageStore.saveToFile(navCtrl.objectType);
 
-           window.location.assign(linkOnFile);
+            window.location.assign(linkOnFile);
         };
 
         // Action for creating new package
         navCtrl.actionCreatePackage = function() {
-          PackageStore.create();
+            PackageStore.create(NotifyStore.push);
         };
 
         // Action for saving package
         navCtrl.actionSavePackage = function() {
-            PackageStore.saveToDB();
+            PackageStore.saveToDB(NotifyStore.push);
         };
 
-        navCtrl.actionMoveToAnchor = function(e) {
-            // set the location.hash to the id of
-            // the element you wish to scroll to.
-           // $location.hash('bottom');
-            e.preventDefault();
+        // Action for deleting package
+        navCtrl.actionDeletePackage = function() {
+            PackageStore.delete(NotifyStore.push);
+        };
 
-            // call $anchorScroll()
-            //$anchorScroll();
-        }
+
     }
 
 })(angular);

@@ -1,0 +1,4 @@
+ul.notification
+    li.notify(ng-repeat="notify in notifyCtrl.getEvents()")
+        h6.notify-title {{notify.status}}
+        div.notify-body {{notify.msg}}

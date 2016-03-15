@@ -4,6 +4,7 @@
     angular
         .module('component.navigation', [
             'factory.packageStore',
+            'factory.notifyStore',
             'directive.scrollTo'
         ])
         .component('navigation', {
@@ -14,7 +15,7 @@
             controllerAs: 'navCtrl'
         });
 
-    function NavCtrl(PackageStore, $attrs) {
+    function NavCtrl(PackageStore, NotifyStore, $attrs) {
         var navCtrl = this;
 
         navCtrl.objectType = ".styl";
@@ -26,28 +27,25 @@
         navCtrl.actionCreateFile = function(){
             var linkOnFile = PackageStore.saveToFile(navCtrl.objectType);
 
-           window.location.assign(linkOnFile);
+            window.location.assign(linkOnFile);
         };
 
         // Action for creating new package
         navCtrl.actionCreatePackage = function() {
-          PackageStore.create();
+            PackageStore.create(NotifyStore.push);
         };
 
         // Action for saving package
         navCtrl.actionSavePackage = function() {
-            PackageStore.saveToDB();
+            PackageStore.saveToDB(NotifyStore.push);
         };
 
-        navCtrl.actionMoveToAnchor = function(e) {
-            // set the location.hash to the id of
-            // the element you wish to scroll to.
-           // $location.hash('bottom');
-            e.preventDefault();
+        // Action for deleting package
+        navCtrl.actionDeletePackage = function() {
+            PackageStore.delete(NotifyStore.push);
+        };
 
-            // call $anchorScroll()
-            //$anchorScroll();
-        }
+
     }
 
 })(angular);
