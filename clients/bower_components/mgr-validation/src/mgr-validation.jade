@@ -1,7 +1,0 @@
-ul.mgr-validation-messages
-	li(
-		ng-repeat='validator in validation.validators track by $index'
-		ng-class='"mgr-" + (validator.type || "invalid")'
-		ng-if='validator.rule(validation.form, validation.field)'
-	)
-		p(ng-bind='validator.message')
